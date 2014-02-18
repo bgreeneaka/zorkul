@@ -1,3 +1,4 @@
+
 #ifndef COMMAND_H_
 #define COMMAND_H_
 
@@ -8,7 +9,7 @@ class Command {
 private:
 	string commandWord;
 	string secondWord;
-
+#
 public:
 	Command(string firstWord, string secondWord);
 	string getCommandWord();
