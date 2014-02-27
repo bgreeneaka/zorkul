@@ -5,14 +5,17 @@
 #include "Parser.h"
 #include "Room.h"
 #include "item.h"
+#include "Character.h"
 #include <iostream>
 #include <string>
 using namespace std;
 
 class ZorkUL {
+
 private:
 	Parser parser;
 	Room *currentRoom;
+    Character *player;
 	void createRooms();
 	void printWelcome();
 	bool processCommand(Command command);
@@ -27,4 +30,4 @@ public:
 	string go(string direction);
 };
 
-#endif /*ZORKUL_H_*/
+#endif
