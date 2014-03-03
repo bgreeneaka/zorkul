@@ -1,7 +1,11 @@
+QT       += core gui
+
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+
+
+TARGET = rooms
 TEMPLATE = app
-CONFIG += console
-CONFIG -= app_bundle
-CONFIG -= qt
+
 
 SOURCES += \
     Character.cpp \
@@ -10,7 +14,9 @@ SOURCES += \
     item.cpp \
     Parser.cpp \
     Room.cpp \
-    ZorkUL.cpp
+    ZorkUL.cpp \
+    rooms.cpp \
+    button.cpp
 
 OTHER_FILES +=
 
@@ -21,5 +27,9 @@ HEADERS += \
     item.h \
     Parser.h \
     Room.h \
-    ZorkUL.h
+    ZorkUL.h \
+    rooms.h \
+    button.h
 
+FORMS    += rooms.ui \
+    rooms.ui

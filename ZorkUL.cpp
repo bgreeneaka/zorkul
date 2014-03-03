@@ -1,12 +1,20 @@
 #include <iostream>
+#include "rooms.h"
+#include <QApplication>
 
 using namespace std;
 #include "ZorkUL.h"
 
-int main(int argc, char argv[]) {
-	ZorkUL temp;
-	temp.play();
-	return 0;
+int main(int argc, char *argv[]) {
+    //ZorkUL temp;
+    //temp.play();
+    //return 0;
+
+    QApplication a(argc, argv);
+    rooms w;
+    w.show();
+
+    return a.exec();
 }
 
 ZorkUL::ZorkUL() {
