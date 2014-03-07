@@ -2,6 +2,10 @@
 #define ROOMS_H
 
 #include <QWidget>
+#include "ZorkUL.h"
+#include "Command.h"
+#include <string>
+using namespace std;
 
 QT_BEGIN_NAMESPACE
 class QLineEdit;
@@ -18,27 +22,27 @@ class rooms : public QWidget
 
 public:
     rooms(QWidget *parent = 0);
+
 private slots:
 void northButtonClicked();
 void southButtonClicked();
 void eastButtonClicked();
 void westButtonClicked();
+void goButtonCommand(string direction, QString text);
 void qbutclicked();
+
 
 private:
     Button *createButton(const QString &text, const char *member);
+    ZorkUL zorkul;
     QLabel *label;
-    QLabel *label2;
-    QLabel *label3;
-    QLabel *label4;
-    QPixmap *emptyroom;
-    QPixmap *room_with_hero;
+    QPixmap *wesn_doors;
 
+    QLineEdit *display;
     QPushButton *n_button;
     QPushButton *s_button;
     QPushButton *e_button;
     QPushButton *w_button;
-
 
 
 

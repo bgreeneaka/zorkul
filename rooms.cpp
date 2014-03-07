@@ -1,30 +1,40 @@
 
 
 #include <QtWidgets>
-
 #include "button.h"
 #include "rooms.h"
+
+
+using namespace std;
+
 
 rooms::rooms(QWidget *parent) :
     QWidget(parent)
 {
 
 //! temp
-    emptyroom = new QPixmap("C:/empty_room.png");
-    room_with_hero = new QPixmap("C:/char_in_room.png");
+//!
+
+
+    wesn_doors = new QPixmap("C:/rooms/wesn_door.png");
+
     //QPixmap mypix ("C:/empty_room.png");
     label = new QLabel();
-    label2 = new QLabel();
-    label3= new QLabel();
-    label4 = new QLabel();
-    label->setPixmap(*emptyroom);
-    label2->setPixmap(*emptyroom);
-    label3->setPixmap(*emptyroom);
-    label4->setPixmap(*room_with_hero);
+
+    label->setPixmap(*wesn_doors);
+  ;
    //! temp
 
 //! [1] //! [2]
+    display = new QLineEdit("");
+//! [1] //! [2]
+    display->setReadOnly(true);
+    display->setAlignment(Qt::AlignRight);
+    display->setMaxLength(15);
 
+    QFont font = display->font();
+    font.setPointSize(font.pointSize() + 8);
+    display->setFont(font);
 
 
 
@@ -48,23 +58,26 @@ rooms::rooms(QWidget *parent) :
         // Connect button signal to appropriate slot
     connect(n_button, SIGNAL(released()), this, SLOT(northButtonClicked()));
     connect(s_button, SIGNAL(released()), this, SLOT(southButtonClicked()));
-    connect(w_button, SIGNAL(released()), this, SLOT(eastButtonClicked()));
-    connect(e_button, SIGNAL(released()), this, SLOT(westButtonClicked()));
+    connect(e_button, SIGNAL(released()), this, SLOT(eastButtonClicked()));
+    connect(w_button, SIGNAL(released()), this, SLOT(westButtonClicked()));
 
     mainLayout->setSizeConstraint(QLayout::SetFixedSize);
 
 
     //mainLayout->addWidget(northButton, 0, 0);
-    controlsLayout->addWidget(n_button,0,1);
-    controlsLayout->addWidget(s_button,1,1);
-    controlsLayout->addWidget(w_button,1,0);
-    controlsLayout->addWidget(e_button,1,2);
+   // controlsLayout->addWidget(n_button,0,1);
+   // controlsLayout->addWidget(s_button,1,1);
+    //controlsLayout->addWidget(w_button,1,0);
+    //controlsLayout->addWidget(e_button,1,2);
     //temp
-    mainLayout->addItem(controlsLayout,0,0);
-    mainLayout->addWidget(label,1,0);
-    mainLayout->addWidget(label2,1,1);
-    mainLayout->addWidget(label3,2,0);
-    mainLayout->addWidget(label4,2,1);
+    //mainLayout->addItem(controlsLayout,0,0);
+    mainLayout->addWidget(n_button,0,1);
+    mainLayout->addWidget(s_button,2,1);
+    mainLayout->addWidget(w_button,1,0);
+    mainLayout->addWidget(e_button,1,2);
+    mainLayout->addWidget(label,1 ,1);
+    mainLayout->addWidget(display, 3, 0, 1, 6);
+
     //temp
     setLayout(mainLayout);
     setWindowTitle(tr("Four room SIM"));
@@ -73,19 +86,35 @@ rooms::rooms(QWidget *parent) :
 
 void rooms::northButtonClicked()
 {
-    ;
+   string direction= "north";
+   QString text =  "north";
+  goButtonCommand(direction,text);
+
 }
 void rooms::southButtonClicked(){
-    ;
-}
+    string direction= "south";
+    QString text =  "south";
+    goButtonCommand(direction,text);
+    }
 
 void rooms::eastButtonClicked(){
-    ;
+    string direction= "east";
+    QString text =  "east";
+    goButtonCommand(direction,text);
 }
 
 void rooms::westButtonClicked(){
-    ;
+    string direction= "west";
+    QString text =  "west";
+    goButtonCommand(direction,text);
 }
+
+void rooms::goButtonCommand(string direction, QString text){
+
+    zorkul.go(direction);
+    display->setText(text);
+
+  ;}
 
 void rooms::qbutclicked(){
 
