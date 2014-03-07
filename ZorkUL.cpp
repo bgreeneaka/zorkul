@@ -136,10 +136,11 @@ bool ZorkUL::processCommand(Command command) {
             //            itemsInRoom.push_Back;
             int location = player->isItemInCharacter(command.getSecondWord());
             if (location < 0) {
-                cout << "item is not in character";
+                cout << "item is not in character" << endl;
             } else {
                 currentRoom->addItem(player->getItem(location));
                 player->removeItem(location);
+                cout << currentRoom->longDescription() << endl;
             }
         }
     }
