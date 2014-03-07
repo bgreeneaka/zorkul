@@ -14,6 +14,8 @@ CommandWords::CommandWords() {
 		validCommands.push_back("map");
 		validCommands.push_back("take");
 		validCommands.push_back("put");
+        validCommands.push_back("inventory");
+        validCommands.push_back("look");
 	}
 }
 

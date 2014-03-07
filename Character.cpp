@@ -6,9 +6,26 @@ Character::Character(string description) {
 }
 
 void Character::addItem(Item item) {
-    cout << "im in your characters, adding your items" << endl;
+    cout << "adding item to char: " << item.getShortDescription() << endl;
     itemsInCharacter.push_back(item);
-    cout << "added item to inventory" << itemsInCharacter.size() << endl;
+    cout << "char inventory size: " << itemsInCharacter.size() << endl;
+}
+
+int Character::isItemInCharacter(string description) {
+    for(unsigned int i = 0; i < itemsInCharacter.size(); i++) {
+        if (description.compare(itemsInCharacter[i].getShortDescription()) == 0) {
+            return i;
+        }
+    }
+    return -1;
+}
+
+Item* Character::getItem(int location) {
+    return &itemsInCharacter[location];
+}
+
+void Character::removeItem(int location) {
+    itemsInCharacter.erase(itemsInCharacter.begin()+location);
 }
 
 //void Character::addItem(Item *item) {
@@ -16,11 +33,15 @@ void Character::addItem(Item item) {
 //    delete item;
 //}
 
-//string Character::longDescription() {
-//  string ret = this->description;
-//  ret += "\n Item list:\n";
-//  for (vector<Item>::iterator i = itemsInCharacter.begin(); i != itemsInCharacter.end(); i++)
-//    ret += "\t"+ (*i).getLongDescription() + "\n";
-//  return ret;
-//}
+string Character::longDescription() {
+    cout << "inventory: " << endl;
+    string items = "";
+
+    for (unsigned int i = 0; i < itemsInCharacter.size(); i++) {
+        items += " "  + itemsInCharacter[i].getShortDescription() + "\n";
+    }
+
+    cout << items;
+    return items;
+}
 

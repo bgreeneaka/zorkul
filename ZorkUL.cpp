@@ -15,6 +15,7 @@ ZorkUL::ZorkUL() {
 
 void ZorkUL::createRooms()  {
     Room *a, *b, *c, *d, *e, *f, *g, *h, *i;
+    player = new Character("me");
 
     a = new Room("a");
     a->addItem(new Item("x", 1, 11));
@@ -116,7 +117,7 @@ bool ZorkUL::processCommand(Command command) {
                     cout << "item is not in room" << endl;
                 } else {
                     cout << "item is in room" << endl;
-                    cout << "index number " << + location << endl;
+                    cout << "item index number " << location << endl;
                     player->addItem(currentRoom->removeItemFromRoom(location));
                     cout << endl;
 
@@ -128,19 +129,29 @@ bool ZorkUL::processCommand(Command command) {
     else if (commandWord.compare("put") == 0)
     {
 
-    }
-    /*
-    {
-    if (!command.hasSecondWord()) {
-        cout << "incomplete input"<< endl;
+        if (!command.hasSecondWord()) {
+            cout << "incomplete input"<< endl;
+        }else if (command.hasSecondWord()) {
+            //            cout << "you're adding " + command.getSecondWord() << endl;
+            //            itemsInRoom.push_Back;
+            int location = player->isItemInCharacter(command.getSecondWord());
+            if (location < 0) {
+                cout << "item is not in character";
+            } else {
+                currentRoom->addItem(player->getItem(location));
+                player->removeItem(location);
+            }
         }
-        else
-            if (command.hasSecondWord()) {
-            cout << "you're adding " + command.getSecondWord() << endl;
-            itemsInRoom.push_Back;
-        }
     }
-*/
+
+    else if (commandWord.compare("inventory") == 0) {
+        player->longDescription();
+    }
+
+    else if (commandWord.compare("look") == 0) {
+        cout << currentRoom->longDescription() << endl;
+    }
+
     else if (commandWord.compare("quit") == 0) {
         if (command.hasSecondWord())
             cout << "overdefined input"<< endl;
