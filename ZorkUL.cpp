@@ -192,4 +192,9 @@ string ZorkUL::go(string direction) {
 		currentRoom = nextRoom;
 		return currentRoom->longDescription();
 	}
+
+
 }
+Room ZorkUL::getCurrentRoom(){
+        return *currentRoom;
+    }

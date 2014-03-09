@@ -5,6 +5,7 @@
 #include "rooms.h"
 
 
+
 using namespace std;
 
 
@@ -22,21 +23,31 @@ rooms::rooms(QWidget *parent) :
     label = new QLabel();
 
     label->setPixmap(*wesn_doors);
-  ;
-   //! temp
 
-//! [1] //! [2]
+    // bottom displa
     display = new QLineEdit("");
-//! [1] //! [2]
     display->setReadOnly(true);
     display->setAlignment(Qt::AlignRight);
     display->setMaxLength(15);
-
     QFont font = display->font();
     font.setPointSize(font.pointSize() + 8);
     display->setFont(font);
-
-
+    //top righ display
+    toprightpane = new QLineEdit("");
+    toprightpane->setReadOnly(true);
+    toprightpane->setAlignment(Qt::AlignRight);
+    toprightpane->setMaxLength(15);
+    QFont toprightfont = toprightpane->font();
+    toprightfont.setPointSize(toprightfont.pointSize() + 8);
+    toprightpane->setFont(toprightfont);
+    //bottom right display
+    botrightpane = new QLineEdit("");
+    botrightpane->setReadOnly(true);
+    botrightpane->setAlignment(Qt::AlignRight);
+    botrightpane->setMaxLength(15);
+    QFont botrightfont = botrightpane->font();
+    botrightfont.setPointSize(botrightfont.pointSize() + 8);
+    botrightpane->setFont(botrightfont);
 
     //label->setPixmap("empty_room.png");
 
@@ -77,7 +88,8 @@ rooms::rooms(QWidget *parent) :
     mainLayout->addWidget(e_button,1,2);
     mainLayout->addWidget(label,1 ,1);
     mainLayout->addWidget(display, 3, 0, 1, 6);
-
+    mainLayout->addWidget(toprightpane, 0, 3, 3, 2);
+    mainLayout->addWidget(botrightpane, 2, 3, 3, 2);
     //temp
     setLayout(mainLayout);
     setWindowTitle(tr("Four room SIM"));
@@ -119,6 +131,10 @@ void rooms::goButtonCommand(string direction, QString text){
 void rooms::qbutclicked(){
 
      //m_button->setText("Example");
+}
+void rooms::getCurrentRoom(){
+    *currentMapRoom=zorkul.getCurrentRoom();
+
 }
 
 Button *rooms::createButton(const QString &text, const char *member)
