@@ -25,7 +25,7 @@ public:
 	ZorkUL();
 	void play();
 	string go(string direction);
-    Room getCurrentRoom();
+     vector<string> getCurrentRoom();
 };
 
 #endif /*ZORKUL_H_*/

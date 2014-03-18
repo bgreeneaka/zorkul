@@ -195,6 +195,8 @@ string ZorkUL::go(string direction) {
 
 
 }
-Room ZorkUL::getCurrentRoom(){
-        return *currentRoom;
+ vector<string> ZorkUL::getCurrentRoom(){
+
+    return currentRoom->getRoomExits();
+
     }

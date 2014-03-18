@@ -16,7 +16,6 @@ rooms::rooms(QWidget *parent) :
 //! temp
 //!
 
-
     wesn_doors = new QPixmap("C:/rooms/wesn_door.png");
 
     //QPixmap mypix ("C:/empty_room.png");
@@ -119,22 +118,26 @@ void rooms::westButtonClicked(){
     string direction= "west";
     QString text =  "west";
     goButtonCommand(direction,text);
+
 }
 
 void rooms::goButtonCommand(string direction, QString text){
 
     zorkul.go(direction);
     display->setText(text);
-
-  ;}
+getCurrentRoom();
+  }
 
 void rooms::qbutclicked(){
 
      //m_button->setText("Example");
 }
 void rooms::getCurrentRoom(){
-    *currentMapRoom=zorkul.getCurrentRoom();
+   zorkul.getCurrentRoom();
 
+   std::string s = zorkul.getCurrentRoom().at(0);
+   QString q = s.c_str();
+   display->setText(q);
 }
 
 Button *rooms::createButton(const QString &text, const char *member)
