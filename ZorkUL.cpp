@@ -1,5 +1,5 @@
 #include <iostream>
-#include "rooms.h"
+#include "GUI.h"
 #include <QApplication>
 
 using namespace std;
@@ -11,7 +11,7 @@ int main(int argc, char *argv[]) {
     //return 0;
 
     QApplication a(argc, argv);
-    rooms w;
+    GUI w;
     w.show();
 
     return a.exec();

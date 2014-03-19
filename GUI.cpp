@@ -1,15 +1,14 @@
 
 
 #include <QtWidgets>
-#include "button.h"
-#include "rooms.h"
+#include "GUI.h"
 
 
 
 using namespace std;
 
 
-rooms::rooms(QWidget *parent) :
+GUI::GUI(QWidget *parent) :
     QWidget(parent)
 {
 
@@ -50,7 +49,7 @@ rooms::rooms(QWidget *parent) :
 
     //label->setPixmap("empty_room.png");
 
-    //Button *northButton = createButton(tr("vh"), SLOT(northButtonClicked()));
+
     n_button = new QPushButton("North", this);
     s_button = new QPushButton("South", this);
     e_button = new QPushButton("East", this);
@@ -95,44 +94,44 @@ rooms::rooms(QWidget *parent) :
 }
 
 
-void rooms::northButtonClicked()
+void GUI::northButtonClicked()
 {
    string direction= "north";
    QString text =  "north";
   goButtonCommand(direction,text);
 
 }
-void rooms::southButtonClicked(){
+void GUI::southButtonClicked(){
     string direction= "south";
     QString text =  "south";
     goButtonCommand(direction,text);
     }
 
-void rooms::eastButtonClicked(){
+void GUI::eastButtonClicked(){
     string direction= "east";
     QString text =  "east";
     goButtonCommand(direction,text);
 }
 
-void rooms::westButtonClicked(){
+void GUI::westButtonClicked(){
     string direction= "west";
     QString text =  "west";
     goButtonCommand(direction,text);
 
 }
 
-void rooms::goButtonCommand(string direction, QString text){
+void GUI::goButtonCommand(string direction, QString text){
 
     zorkul.go(direction);
     display->setText(text);
 getCurrentRoom();
   }
 
-void rooms::qbutclicked(){
+void GUI::qbutclicked(){
 
      //m_button->setText("Example");
 }
-void rooms::getCurrentRoom(){
+void GUI::getCurrentRoom(){
    zorkul.getCurrentRoom();
 
    std::string s = zorkul.getCurrentRoom().at(0);
@@ -140,10 +139,4 @@ void rooms::getCurrentRoom(){
    display->setText(q);
 }
 
-Button *rooms::createButton(const QString &text, const char *member)
-{
-    Button *button = new Button(text);
-    connect(button, SIGNAL(clicked()), this, member);
-    return button;
-}
 

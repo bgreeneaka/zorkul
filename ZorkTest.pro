@@ -15,8 +15,7 @@ SOURCES += \
     Parser.cpp \
     Room.cpp \
     ZorkUL.cpp \
-    rooms.cpp \
-    button.cpp
+    GUI.cpp
 
 OTHER_FILES +=
 
@@ -28,8 +27,7 @@ HEADERS += \
     Parser.h \
     Room.h \
     ZorkUL.h \
-    rooms.h \
-    button.h
+    GUI.h
 
 FORMS    += rooms.ui \
     rooms.ui

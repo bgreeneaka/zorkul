@@ -1,5 +1,5 @@
-#ifndef ROOMS_H
-#define ROOMS_H
+#ifndef GUI_H
+#define GUI_H
 
 #include <QWidget>
 #include "ZorkUL.h"
@@ -14,15 +14,15 @@ class QLabel;
 class QPixmap;
 class QPushButton;
 QT_END_NAMESPACE
-class Button;
 
 
-class rooms : public QWidget
+
+class GUI : public QWidget
 {
     Q_OBJECT
 
 public:
-    rooms(QWidget *parent = 0);
+    GUI(QWidget *parent = 0);
 
 private slots:
 void northButtonClicked();
@@ -35,7 +35,7 @@ void getCurrentRoom();
 
 
 private:
-    Button *createButton(const QString &text, const char *member);
+
     ZorkUL zorkul;
     QLabel *label;
     QPixmap *wesn_doors;
@@ -52,4 +52,4 @@ private:
 
 };
 
-#endif // ROOMS_H
+#endif // GUI_H
