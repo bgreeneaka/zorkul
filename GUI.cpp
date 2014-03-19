@@ -5,8 +5,7 @@ using namespace std;
 
 GUI::GUI(QWidget *parent) :
     QWidget(parent)
-{
-
+{  
     // bottom display
     bottomDisplay = new QLineEdit("");
 
@@ -17,7 +16,6 @@ GUI::GUI(QWidget *parent) :
     font.setPointSize(font.pointSize() + 8);
     bottomDisplay->setFont(font);
     bottomDisplay->setFocus();
-
 
     //top right display
     toprightpane = new QTextEdit("");
@@ -34,8 +32,6 @@ GUI::GUI(QWidget *parent) :
     QFont toprightfont = toprightpane->font();
     toprightfont.setPointSize(toprightfont.pointSize() + 8);
     toprightpane->setFont(toprightfont);
-
-    //label->setPixmap("empty_room.png");
 
     n_button = new QPushButton("North", this);
     s_button = new QPushButton("South", this);
@@ -64,11 +60,9 @@ GUI::GUI(QWidget *parent) :
     roomLayout->setHorizontalSpacing(0);
     roomLayout->setVerticalSpacing(0);
 
-
     drawFloor();
     drawWall();
     drawDoor();
-
 
     mainLayout->setSizeConstraint(QLayout::SetFixedSize);
 
@@ -83,17 +77,15 @@ GUI::GUI(QWidget *parent) :
     mainLayout->addWidget(bottomDisplay, 3, 0, 1, 6);
 
     setLayout(mainLayout);
-    setWindowTitle(tr("Four room SIM"));
+    setWindowTitle(tr("ZorkUL"));
 }
 
-
-void GUI::northButtonClicked()
-{
+void GUI::northButtonClicked() {
     string direction= "north";
     QString text =  "north";
     goButtonCommand(direction,text);
-
 }
+
 void GUI::southButtonClicked(){
     string direction= "south";
     QString text =  "south";
@@ -110,21 +102,19 @@ void GUI::westButtonClicked(){
     string direction= "west";
     QString text =  "west";
     goButtonCommand(direction,text);
-
 }
 
-void GUI::goButtonCommand(string direction, QString text){
-
+void GUI::goButtonCommand(string direction, QString text){  
     zorkul.go(direction);
     bottomDisplay->setText(text);
     getCurrentRoomDescription();
     updateGUI();
 }
 
-void GUI::qbutclicked(){
-
+void GUI::qbutclicked(){   
     //m_button->setText("Example");
 }
+
 void GUI::getCurrentRoomDescription(){
     zorkul.getRoomDescription();
     string tempStr = zorkul.getRoomDescription();
@@ -140,39 +130,38 @@ void GUI::updateGUI(){
 }
 
 void GUI::cmdLineEnterPressed(){
-QString QuserInput = bottomDisplay->text();
-string userinput = QuserInput.toLocal8Bit().constData();
-string first, second;
-vector<string> cmds;
+    QString QuserInput = bottomDisplay->text();
+    string userinput = QuserInput.toLocal8Bit().constData();
+    string first, second;
+    vector<string> cmds;
 
-std::istringstream ss(userinput);
-string token;
+    std::istringstream ss(userinput);
+    string token;
 
-while(std::getline(ss, token, ' ')) {
-   cmds.push_back(token);
-}
-if(cmds.size()>1){
-first = cmds.at(0);
-second = cmds.at(1);
-}
-else if(cmds.size()>0){
-first = "";
-second = cmds.at(0);
-}
-else{
-    first = "";
-    second = "";
-}
+    while(std::getline(ss, token, ' ')) {
+        cmds.push_back(token);
+    }
+    if(cmds.size()>1){
+        first = cmds.at(0);
+        second = cmds.at(1);
+    }
+    else if(cmds.size()>0){
+        first = "";
+        second = cmds.at(0);
+    }
+    else{
+        first = "";
+        second = "";
+    }
 
-Command *cmd = new Command(first, second);
-zorkul.processCommand(*cmd);
+    Command *cmd = new Command(first, second);
+    zorkul.processCommand(*cmd);
 
+    getCurrentRoomDescription();
+    updateGUI();
 
-getCurrentRoomDescription();
-updateGUI();
-
-bottomDisplay->setText("");
-delete cmd;
+    bottomDisplay->setText("");
+    delete cmd;
 }
 
 void GUI::drawFloor() {
