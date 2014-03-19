@@ -87,11 +87,10 @@ int Room::isItemInRoom(string inString)
         }
     return -1;
 }
-vector<string> Room::getRoomExits(){
+string Room::getRoomExits(){
 
-    vector<string> exits;
-    exits.push_back("abc");
-    return exits;
+
+    return exitString();
 }
 
 

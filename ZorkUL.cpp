@@ -1,7 +1,7 @@
 #include <iostream>
 #include "GUI.h"
 #include <QApplication>
-
+#include <QDir>
 using namespace std;
 #include "ZorkUL.h"
 
@@ -9,7 +9,7 @@ int main(int argc, char *argv[]) {
     //ZorkUL temp;
     //temp.play();
     //return 0;
-
+    QDir::setCurrent(QCoreApplication::applicationDirPath());
     QApplication a(argc, argv);
     GUI w;
     w.show();
@@ -195,8 +195,12 @@ string ZorkUL::go(string direction) {
 
 
 }
- vector<string> ZorkUL::getCurrentRoom(){
 
-    return currentRoom->getRoomExits();
+ string ZorkUL::getCurrentRoom(){
+return currentRoom->getRoomExits();
+
 
     }
+  string ZorkUL::getRoomDiscription(){
+      return currentRoom->longDescription();
+  }

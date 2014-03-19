@@ -10,6 +10,7 @@ using namespace std;
 
 QT_BEGIN_NAMESPACE
 class QLineEdit;
+class QTextEdit;
 class QLabel;
 class QPixmap;
 class QPushButton;
@@ -32,16 +33,31 @@ void westButtonClicked();
 void goButtonCommand(string direction, QString text);
 void qbutclicked();
 void getCurrentRoom();
+void tilesInit();
+void updateGUI();
 
 
 private:
 
     ZorkUL zorkul;
     QLabel *label;
+    // tiles
     QPixmap *wesn_doors;
+    QPixmap *e_doors;
+    QPixmap *es_doors;
+    QPixmap *n_doors;
+    QPixmap *ne_doors;
+    QPixmap *ns_doors;
+    QPixmap *s_doors;
+    QPixmap *se_doors;
+    QPixmap *w_doors;
+    QPixmap *we_doors;
+    QPixmap *wes_doors;
+    QPixmap *wn_doors;
+    // tiles
     Room *currentMapRoom;
     QLineEdit *display;
-    QLineEdit *toprightpane;
+    QTextEdit  *toprightpane;
     QLineEdit *botrightpane;
     QPushButton *n_button;
     QPushButton *s_button;

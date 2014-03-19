@@ -31,3 +31,6 @@ HEADERS += \
 
 FORMS    += rooms.ui \
     rooms.ui
+
+RESOURCES += \
+    images.qrc
