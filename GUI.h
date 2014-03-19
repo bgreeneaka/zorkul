@@ -34,10 +34,10 @@ void westButtonClicked();
 void goButtonCommand(string direction, QString text);
 void qbutclicked();
 void getCurrentRoomDescription();
-void tilesInit();
 void updateGUI();
 void drawFloor();
 void drawWall();
+void drawDoor();
 
 private:
 
