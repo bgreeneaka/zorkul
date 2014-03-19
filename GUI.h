@@ -56,7 +56,7 @@ private:
     QPixmap *wn_doors;
     // tiles
     Room *currentMapRoom;
-    QLineEdit *display;
+    QLineEdit *bottomDisplay;
     QTextEdit  *toprightpane;
     QLineEdit *botrightpane;
     QPushButton *n_button;

@@ -8,7 +8,7 @@ using namespace std;
 int main(int argc, char *argv[]) {
     //ZorkUL temp;
     //temp.play();
-    //return 0;    
+    //return 0;
     QApplication a(argc, argv);
     QDir::setCurrent(QCoreApplication::applicationDirPath());
     GUI w;
@@ -196,24 +196,23 @@ void ZorkUL::goRoom(Command command) {
 }
 
 string ZorkUL::go(string direction) {
-	//Make the direction lowercase
-	//transform(direction.begin(), direction.end(), direction.begin(),:: tolower);
-	//Move to the next room
-	Room* nextRoom = currentRoom->nextRoom(direction);
-	if (nextRoom == NULL)
-		return("direction null");
-	else
-	{
-		currentRoom = nextRoom;
-		return currentRoom->longDescription();
-	}
+    //Make the direction lowercase
+    //transform(direction.begin(), direction.end(), direction.begin(),:: tolower);
+    //Move to the next room
+    Room* nextRoom = currentRoom->nextRoom(direction);
+    if (nextRoom == NULL)
+        return("direction null");
+    else
+    {
+        currentRoom = nextRoom;
+        return currentRoom->longDescription();
+    }
 }
 
- string ZorkUL::getRoomExits(){
-return currentRoom->getRoomExits();
+vector<string> ZorkUL::getRoomExits(){
+    return currentRoom->getRoomExits();
+}
 
-
-    }
-  string ZorkUL::getRoomDescription(){
-      return currentRoom->longDescription();
-  }
+string ZorkUL::getRoomDescription(){
+    return currentRoom->longDescription();
+}

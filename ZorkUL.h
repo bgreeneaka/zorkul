@@ -28,7 +28,7 @@ public:
 	ZorkUL();
 	void play();
 	string go(string direction);
-    string getRoomExits();
+    vector<string> getRoomExits();
     string getRoomDescription();
 };
 

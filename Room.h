@@ -21,7 +21,7 @@ public:
     int numberOfItems();
     Room(string description);
 	void setExits(Room *north, Room *east, Room *south, Room *west);
-    string getRoomExits();
+    vector<string> getRoomExits();
     string shortDescription();
 	string longDescription();
 	Room* nextRoom(string direction);
