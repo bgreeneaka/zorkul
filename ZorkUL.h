@@ -28,8 +28,8 @@ public:
 	ZorkUL();
 	void play();
 	string go(string direction);
-    string getCurrentRoom();
-    string getRoomDiscription();
+    string getRoomExits();
+    string getRoomDescription();
 };
 
 #endif

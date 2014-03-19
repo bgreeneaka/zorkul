@@ -32,7 +32,7 @@ void eastButtonClicked();
 void westButtonClicked();
 void goButtonCommand(string direction, QString text);
 void qbutclicked();
-void getCurrentRoom();
+void getCurrentRoomDescription();
 void tilesInit();
 void updateGUI();
 

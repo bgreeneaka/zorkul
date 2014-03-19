@@ -22,7 +22,7 @@ tilesInit();
 
     label->setPixmap(*wesn_doors);
 
-    // bottom displa
+    // bottom display
     display = new QLineEdit("");
     display->setReadOnly(true);
     display->setAlignment(Qt::AlignRight);
@@ -30,14 +30,17 @@ tilesInit();
     QFont font = display->font();
     font.setPointSize(font.pointSize() + 8);
     display->setFont(font);
-    //top righ display
+
+    //top right display
     toprightpane = new QTextEdit("");
+
     //get current room details
-    zorkul.getRoomDiscription();
-    string tempStr = zorkul.getRoomDiscription();
+    zorkul.getRoomDescription();
+    string tempStr = zorkul.getRoomDescription();
     QString roomDiscription = tempStr.c_str();
     toprightpane->setText(roomDiscription);
-    // room detailsdisplayed
+
+    // room details display
     toprightpane->setReadOnly(true);
     toprightpane->setAlignment(Qt::AlignLeft);
     QFont toprightfont = toprightpane->font();
@@ -124,21 +127,21 @@ void GUI::goButtonCommand(string direction, QString text){
 
     zorkul.go(direction);
     display->setText(text);
-getCurrentRoom();
-updateGUI();
+    getCurrentRoomDescription();
+    updateGUI();
   }
 
 void GUI::qbutclicked(){
 
      //m_button->setText("Example");
 }
-void GUI::getCurrentRoom(){
-
-   zorkul.getRoomDiscription();
-   string tempStr = zorkul.getRoomDiscription();
+void GUI::getCurrentRoomDescription(){
+   zorkul.getRoomDescription();
+   string tempStr = zorkul.getRoomDescription();
    QString roomDiscription = tempStr.c_str();
    toprightpane->setText(roomDiscription);
 }
+
 void GUI::tilesInit(){
 
    wesn_doors = new QPixmap("://resources/images/rooms/wesn_door.png");
@@ -156,11 +159,8 @@ void GUI::tilesInit(){
 }
 
 void GUI::updateGUI(){
-
-string exits = zorkul.getCurrentRoom();
-
-
-     label->setPixmap(*wes_doors);;
+    string exits = zorkul.getRoomExits();
+    label->setPixmap(*es_doors);;
 }
 
 

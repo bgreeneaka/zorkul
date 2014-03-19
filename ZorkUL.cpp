@@ -8,9 +8,9 @@ using namespace std;
 int main(int argc, char *argv[]) {
     //ZorkUL temp;
     //temp.play();
-    //return 0;
-    QDir::setCurrent(QCoreApplication::applicationDirPath());
+    //return 0;    
     QApplication a(argc, argv);
+    QDir::setCurrent(QCoreApplication::applicationDirPath());
     GUI w;
     w.show();
 
@@ -209,11 +209,11 @@ string ZorkUL::go(string direction) {
 	}
 }
 
- string ZorkUL::getCurrentRoom(){
+ string ZorkUL::getRoomExits(){
 return currentRoom->getRoomExits();
 
 
     }
-  string ZorkUL::getRoomDiscription(){
+  string ZorkUL::getRoomDescription(){
       return currentRoom->longDescription();
   }
