@@ -18,7 +18,7 @@ private:
     Character *player;
 	void createRooms();
 	void printWelcome();
-	bool processCommand(Command command);
+    //bool processCommand(Command command);
 	void printHelp();
 	void goRoom(Command command);
     void createItems();
@@ -28,6 +28,7 @@ public:
 	ZorkUL();
 	void play();
 	string go(string direction);
+    bool processCommand(Command command);
     vector<string> getRoomExits();
     string getRoomDescription();
 };

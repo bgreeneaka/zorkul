@@ -1,6 +1,6 @@
 #include <QtWidgets>
 #include "GUI.h"
-
+#include <sstream>
 using namespace std;
 
 GUI::GUI(QWidget *parent) :
@@ -19,12 +19,15 @@ GUI::GUI(QWidget *parent) :
 
     // bottom display
     bottomDisplay = new QLineEdit("");
-    bottomDisplay->setReadOnly(true);
-    bottomDisplay->setAlignment(Qt::AlignRight);
-    bottomDisplay->setMaxLength(15);
+
+    bottomDisplay->setAlignment(Qt::AlignLeft);
+    bottomDisplay->setMaxLength(35);
     QFont font = bottomDisplay->font();
+    connect(bottomDisplay, SIGNAL(returnPressed()), this, SLOT(cmdLineEnterPressed()));
     font.setPointSize(font.pointSize() + 8);
     bottomDisplay->setFont(font);
+    bottomDisplay->setFocus();
+
 
     //top right display
     toprightpane = new QTextEdit("");
@@ -185,6 +188,42 @@ void GUI::tilesInit(){
 void GUI::updateGUI(){
     vector<string> exits = zorkul.getRoomExits();
     label->setPixmap(*es_doors);
+    bottomDisplay->setFocus();
+}
+void GUI::cmdLineEnterPressed(){
+QString QuserInput = bottomDisplay->text();
+string userinput = QuserInput.toLocal8Bit().constData();
+string first, second;
+vector<string> cmds;
+
+std::istringstream ss(userinput);
+string token;
+
+while(std::getline(ss, token, ' ')) {
+   cmds.push_back(token);
+}
+if(cmds.size()>1){
+first = cmds.at(0);
+second = cmds.at(1);
+}
+else if(cmds.size()>0){
+first = "";
+second = cmds.at(0);
+}
+else{
+    first = "";
+    second = "";
+}
+
+Command *cmd = new Command(first, second);
+zorkul.processCommand(*cmd);
+
+
+getCurrentRoomDescription();
+updateGUI();
+
+bottomDisplay->setText("");
+delete cmd;
 }
 
 

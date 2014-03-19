@@ -35,6 +35,7 @@ void qbutclicked();
 void getCurrentRoomDescription();
 void tilesInit();
 void updateGUI();
+void cmdLineEnterPressed();
 
 
 private:
