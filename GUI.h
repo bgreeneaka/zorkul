@@ -14,6 +14,7 @@ class QTextEdit;
 class QLabel;
 class QPixmap;
 class QPushButton;
+class QGridLayout;
 QT_END_NAMESPACE
 
 
@@ -35,7 +36,8 @@ void qbutclicked();
 void getCurrentRoomDescription();
 void tilesInit();
 void updateGUI();
-
+void drawFloor();
+void drawWall();
 
 private:
 
@@ -66,6 +68,10 @@ private:
     QPushButton *s_button;
     QPushButton *e_button;
     QPushButton *w_button;
+
+    QGridLayout *mainLayout;
+    QGridLayout *controlsLayout;
+    QGridLayout *roomLayout;
 };
 
 #endif // GUI_H

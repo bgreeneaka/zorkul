@@ -17,6 +17,7 @@ GUI::GUI(QWidget *parent) :
 
     label->setPixmap(*wesn_doors);
 
+
     // bottom display
     bottomDisplay = new QLineEdit("");
     bottomDisplay->setReadOnly(true);
@@ -64,35 +65,35 @@ GUI::GUI(QWidget *parent) :
     connect(e_button, SIGNAL(released()), this, SLOT(eastButtonClicked()));
     connect(w_button, SIGNAL(released()), this, SLOT(westButtonClicked()));
 
-    QGridLayout *mainLayout = new QGridLayout;
-    QGridLayout *controlsLayout = new QGridLayout;
+    mainLayout = new QGridLayout();
+    controlsLayout = new QGridLayout();
+    roomLayout = new QGridLayout();
+
+    roomLayout->setHorizontalSpacing(0);
+    roomLayout->setVerticalSpacing(0);
+
+
+//    QPushButton *doorButton = new QPushButton;
+//    doorButton->setIcon(QIcon("://resources/images/rooms/closed_door.png"));
+//    roomLayout->addWidget(doorButton, 0, 4);
+
+//    QPushButton *doorButton2 = new QPushButton;
+//    doorButton2->setIcon(QIcon("://resources/images/rooms/closed_door.png"));
+//    roomLayout->addWidget(doorButton2, 4, 0);
+
+//    QPushButton *doorButton3 = new QPushButton;
+//    doorButton3->setIcon(QIcon("://resources/images/rooms/closed_door.png"));
+//    roomLayout->addWidget(doorButton3, 4, 8);
+
+//    QPushButton *doorButton4 = new QPushButton;
+//    doorButton4->setIcon(QIcon("://resources/images/rooms/closed_door.png"));
+//    roomLayout->addWidget(doorButton4, 8, 4);
 
 
 
 
-
-    QGridLayout *roomLayout = new QGridLayout;
-
-    QPushButton *doorButton = new QPushButton;
-    doorButton->setIcon(QIcon("://resources/images/rooms/closed_door.png"));
-    roomLayout->addWidget(doorButton, 0, 4);
-
-    QPushButton *doorButton2 = new QPushButton;
-    doorButton2->setIcon(QIcon("://resources/images/rooms/closed_door.png"));
-    roomLayout->addWidget(doorButton2, 4, 0);
-
-    QPushButton *doorButton3 = new QPushButton;
-    doorButton3->setIcon(QIcon("://resources/images/rooms/closed_door.png"));
-    roomLayout->addWidget(doorButton3, 4, 8);
-
-    QPushButton *doorButton4 = new QPushButton;
-    doorButton4->setIcon(QIcon("://resources/images/rooms/closed_door.png"));
-    roomLayout->addWidget(doorButton4, 8, 4);
-
-
-
-
-
+    drawFloor();
+    drawWall();
 
 
     mainLayout->setSizeConstraint(QLayout::SetFixedSize);
@@ -184,7 +185,43 @@ void GUI::tilesInit(){
 
 void GUI::updateGUI(){
     vector<string> exits = zorkul.getRoomExits();
-    label->setPixmap(*es_doors);
+}
+
+void GUI::drawFloor() {
+    for (unsigned int i = 0; i < 10; i++) {
+        for (unsigned int j = 0; j < 10; j++) {
+            QLabel *floorLabel = new QLabel();
+            floorLabel->setPixmap(QPixmap("://resources/images/rooms/pedestal_full.png"));
+            roomLayout->addWidget(floorLabel, i, j);
+        }
+    }
+}
+
+void GUI::drawWall() {
+    int j = 0;
+    for (unsigned int i = 0; i < 10; i++) {
+        QLabel *wallLabel = new QLabel();
+        wallLabel->setPixmap(QPixmap("://resources/images/rooms/brick_brown0.png"));
+        roomLayout->addWidget(wallLabel, i, j);
+    }
+    j = 9;
+    for (unsigned int i = 0; i < 10; i++) {
+        QLabel *wallLabel = new QLabel();
+        wallLabel->setPixmap(QPixmap("://resources/images/rooms/brick_brown0.png"));
+        roomLayout->addWidget(wallLabel, i, j);
+    }
+    j = 9;
+    for (unsigned int i = 0; i < 10; i++) {
+        QLabel *wallLabel = new QLabel();
+        wallLabel->setPixmap(QPixmap("://resources/images/rooms/brick_brown0.png"));
+        roomLayout->addWidget(wallLabel, j, i);
+    }
+    j = 0;
+    for (unsigned int i = 0; i < 10; i++) {
+        QLabel *wallLabel = new QLabel();
+        wallLabel->setPixmap(QPixmap("://resources/images/rooms/brick_brown0.png"));
+        roomLayout->addWidget(wallLabel, j, i);
+    }
 }
 
 
