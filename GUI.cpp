@@ -64,6 +64,7 @@ GUI::GUI(QWidget *parent) :
 
     drawFloor();
     drawWall();
+    drawDoor();
 
 
     mainLayout->setSizeConstraint(QLayout::SetFixedSize);
@@ -129,7 +130,9 @@ void GUI::getCurrentRoomDescription(){
 }
 
 void GUI::updateGUI(){
-    vector<string> exits = zorkul.getRoomExits();
+    drawFloor();
+    drawWall();
+    drawDoor();
 }
 
 void GUI::drawFloor() {
@@ -170,6 +173,13 @@ void GUI::drawWall() {
 }
 
 void GUI::drawDoor() {
-
+    vector<string> exits = zorkul.getRoomExits();
+    for (unsigned int i = 0; i < exits.size(); i++) {
+        if (exits[i].compare("east") == 0) {
+            QPushButton *doorButton = new QPushButton();
+            doorButton->setIcon(QIcon("://resources/images/rooms/closed_door.png"));
+            roomLayout->addWidget(doorButton, 4, 9);
+        }
+    }
 }
 
