@@ -12,5 +12,6 @@
         <file>resources/images/rooms/we_door.png</file>
         <file>resources/images/rooms/wes_door.png</file>
         <file>resources/images/rooms/wn_door.png</file>
+        <file>resources/images/rooms/closed_door.png</file>
     </qresource>
 </RCC>

@@ -41,6 +41,7 @@ private:
 
     ZorkUL zorkul;
     QLabel *label;
+
     // tiles
     QPixmap *wesn_doors;
     QPixmap *e_doors;
@@ -54,7 +55,9 @@ private:
     QPixmap *we_doors;
     QPixmap *wes_doors;
     QPixmap *wn_doors;
+    QPixmap *door;
     // tiles
+
     Room *currentMapRoom;
     QLineEdit *bottomDisplay;
     QTextEdit  *toprightpane;
@@ -63,9 +66,6 @@ private:
     QPushButton *s_button;
     QPushButton *e_button;
     QPushButton *w_button;
-
-
-
 };
 
 #endif // GUI_H

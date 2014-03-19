@@ -42,17 +42,12 @@ GUI::GUI(QWidget *parent) :
     toprightfont.setPointSize(toprightfont.pointSize() + 8);
     toprightpane->setFont(toprightfont);
 
-
     //label->setPixmap("empty_room.png");
-
 
     n_button = new QPushButton("North", this);
     s_button = new QPushButton("South", this);
     e_button = new QPushButton("East", this);
     w_button = new QPushButton("West", this);
-
-    QGridLayout *mainLayout = new QGridLayout;
-    QGridLayout *controlsLayout = new QGridLayout;
 
     n_button->setGeometry(QRect(QPoint(100, 100),
                                 QSize(200, 50)));
@@ -69,8 +64,38 @@ GUI::GUI(QWidget *parent) :
     connect(e_button, SIGNAL(released()), this, SLOT(eastButtonClicked()));
     connect(w_button, SIGNAL(released()), this, SLOT(westButtonClicked()));
 
-    mainLayout->setSizeConstraint(QLayout::SetFixedSize);
+    QGridLayout *mainLayout = new QGridLayout;
+    QGridLayout *controlsLayout = new QGridLayout;
 
+
+
+
+
+    QGridLayout *roomLayout = new QGridLayout;
+
+    QPushButton *doorButton = new QPushButton;
+    doorButton->setIcon(QIcon("://resources/images/rooms/closed_door.png"));
+    roomLayout->addWidget(doorButton, 0, 4);
+
+    QPushButton *doorButton2 = new QPushButton;
+    doorButton2->setIcon(QIcon("://resources/images/rooms/closed_door.png"));
+    roomLayout->addWidget(doorButton2, 4, 0);
+
+    QPushButton *doorButton3 = new QPushButton;
+    doorButton3->setIcon(QIcon("://resources/images/rooms/closed_door.png"));
+    roomLayout->addWidget(doorButton3, 4, 8);
+
+    QPushButton *doorButton4 = new QPushButton;
+    doorButton4->setIcon(QIcon("://resources/images/rooms/closed_door.png"));
+    roomLayout->addWidget(doorButton4, 8, 4);
+
+
+
+
+
+
+
+    mainLayout->setSizeConstraint(QLayout::SetFixedSize);
 
     //mainLayout->addWidget(northButton, 0, 0);
     // controlsLayout->addWidget(n_button,0,1);
@@ -85,7 +110,7 @@ GUI::GUI(QWidget *parent) :
     mainLayout->addWidget(s_button,2,1);
     mainLayout->addWidget(w_button,1,0);
     mainLayout->addWidget(e_button,1,2);
-    mainLayout->addWidget(label,1 ,1);
+    mainLayout->addItem(roomLayout,1 ,1);
     mainLayout->addWidget(bottomDisplay, 3, 0, 1, 6);
 
     // mainLayout->addWidget(botrightpane, 2, 3, 3, 2);
@@ -154,11 +179,12 @@ void GUI::tilesInit(){
     we_doors = new QPixmap("://resources/images/rooms/we_door.png");
     wes_doors = new QPixmap("://resources/images/rooms/wes_door.png");
     wn_doors = new QPixmap("://resources/images/rooms/wn_door.png");
+    door = new QPixmap("://resources/images/rooms/closed_door.png");
 }
 
 void GUI::updateGUI(){
     vector<string> exits = zorkul.getRoomExits();
-    label->setPixmap(*es_doors);;
+    label->setPixmap(*es_doors);
 }
 
 
