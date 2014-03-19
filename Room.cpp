@@ -86,6 +86,12 @@ int Room::isItemInRoom(string inString)
     }
     return -1;
 }
+string Room::getRoomExits(){
+
+
+    return exitString();
+}
+
 
 Item Room::removeItemFromRoom(int location) {
     Item temp = itemsInRoom.at(location);

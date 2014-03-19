@@ -1,0 +1,16 @@
+<RCC>
+    <qresource prefix="/">
+        <file>resources/images/rooms/wesn_door.png</file>
+        <file>resources/images/rooms/e_door.png</file>
+        <file>resources/images/rooms/es_door.png</file>
+        <file>resources/images/rooms/n_door.png</file>
+        <file>resources/images/rooms/ne_door.png</file>
+        <file>resources/images/rooms/ns_door.png</file>
+        <file>resources/images/rooms/s_door.png</file>
+        <file>resources/images/rooms/se_door.png</file>
+        <file>resources/images/rooms/w_door.png</file>
+        <file>resources/images/rooms/we_door.png</file>
+        <file>resources/images/rooms/wes_door.png</file>
+        <file>resources/images/rooms/wn_door.png</file>
+    </qresource>
+</RCC>
