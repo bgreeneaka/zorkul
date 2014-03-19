@@ -14,6 +14,7 @@ class QTextEdit;
 class QLabel;
 class QPixmap;
 class QPushButton;
+class QGridLayout;
 QT_END_NAMESPACE
 
 
@@ -33,10 +34,11 @@ void westButtonClicked();
 void goButtonCommand(string direction, QString text);
 void qbutclicked();
 void getCurrentRoomDescription();
-void tilesInit();
 void updateGUI();
 void cmdLineEnterPressed();
-
+void drawFloor();
+void drawWall();
+void drawDoor();
 
 private:
 
@@ -67,6 +69,10 @@ private:
     QPushButton *s_button;
     QPushButton *e_button;
     QPushButton *w_button;
+
+    QGridLayout *mainLayout;
+    QGridLayout *controlsLayout;
+    QGridLayout *roomLayout;
 };
 
 #endif // GUI_H
