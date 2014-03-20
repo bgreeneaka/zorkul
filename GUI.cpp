@@ -38,6 +38,15 @@ GUI::GUI(QWidget *parent) :
     e_button = new QPushButton("East", this);
     w_button = new QPushButton("West", this);
 
+
+    //new butttons - map, info character etc
+    info_button = new QPushButton("Info", this);
+    map_button = new QPushButton("Map", this);
+    inv_button = new QPushButton("Inventory", this);
+    look_button = new QPushButton("Look", this);
+
+
+    //new butttons - map, info character etc
     n_button->setGeometry(QRect(QPoint(100, 100),
                                 QSize(200, 50)));
     s_button->setGeometry(QRect(QPoint(100, 100),
@@ -46,12 +55,24 @@ GUI::GUI(QWidget *parent) :
                                 QSize(200, 50)));
     w_button->setGeometry(QRect(QPoint(100, 100),
                                 QSize(200, 50)));
+    info_button->setGeometry(QRect(QPoint(100, 100),
+                                   QSize(200, 50)));
+    map_button->setGeometry(QRect(QPoint(100, 100),
+                                  QSize(200, 50)));
+    inv_button->setGeometry(QRect(QPoint(100, 100),
+                                  QSize(200, 50)));
+    look_button->setGeometry(QRect(QPoint(100, 100),
+                                   QSize(200, 50)));
 
     // Connect button signal to appropriate slot
     connect(n_button, SIGNAL(released()), this, SLOT(northButtonClicked()));
     connect(s_button, SIGNAL(released()), this, SLOT(southButtonClicked()));
     connect(e_button, SIGNAL(released()), this, SLOT(eastButtonClicked()));
     connect(w_button, SIGNAL(released()), this, SLOT(westButtonClicked()));
+    connect(info_button, SIGNAL(released()), this, SLOT(infoButtonClicked()));
+    connect(map_button, SIGNAL(released()), this, SLOT(mapButtonClicked()));
+    connect(inv_button, SIGNAL(released()), this, SLOT(invButtonClicked()));
+    connect(look_button, SIGNAL(released()), this, SLOT(lookButtonClicked()));
 
     mainLayout = new QGridLayout();
     controlsLayout = new QGridLayout();
@@ -66,8 +87,11 @@ GUI::GUI(QWidget *parent) :
 
     mainLayout->setSizeConstraint(QLayout::SetFixedSize);
 
-    controlsLayout->addWidget(toprightpane, 0, 0,2,2);
-
+    controlsLayout->addWidget(toprightpane, 1, 0,4,4);
+    controlsLayout->addWidget(info_button, 0,0);
+    controlsLayout->addWidget(map_button, 0,1);
+    controlsLayout->addWidget(inv_button, 0,2);
+    controlsLayout->addWidget(look_button, 0,3);
     mainLayout->addItem(controlsLayout,0,3,2,3);
     mainLayout->addWidget(n_button,0,1);
     mainLayout->addWidget(s_button,2,1);
@@ -104,6 +128,30 @@ void GUI::westButtonClicked(){
     goButtonCommand(direction,text);
 }
 
+void GUI::infoButtonClicked(){
+
+
+}
+void GUI::mapButtonClicked(){
+    toprightpane->clear();
+    toprightpane->append("  Map of world:");
+    toprightpane->append(" [h] --- [f] --- [g]");
+    toprightpane->append("           |         ");
+    toprightpane->append("           |         ") ;
+    toprightpane->append("  [c] --- [a] --- [b]");
+    toprightpane->append("           |         ") ;
+    toprightpane->append("           |         ") ;
+    toprightpane->append("  [i] --- [d] --- [e]") ;
+}
+void GUI::invButtonClicked(){
+
+
+}
+void GUI::lookButtonClicked(){
+    getCurrentRoomDescription();
+
+}
+
 void GUI::goButtonCommand(string direction, QString text){  
     zorkul.go(direction);
     bottomDisplay->setText(text);
@@ -134,10 +182,11 @@ void GUI::cmdLineEnterPressed(){
     string userinput = QuserInput.toLocal8Bit().constData();
     string first, second;
     vector<string> cmds;
+    bool validInput = false;
 
     std::istringstream ss(userinput);
     string token;
-
+    bottomDisplay->setText("");
     while(std::getline(ss, token, ' ')) {
         cmds.push_back(token);
     }
@@ -146,22 +195,52 @@ void GUI::cmdLineEnterPressed(){
         second = cmds.at(1);
     }
     else if(cmds.size()>0){
-        first = "";
-        second = cmds.at(0);
+        first = cmds.at(0);
+        second = "";
     }
     else{
         first = "";
         second = "";
+        bottomDisplayInvalidInput();
     }
 
-    Command *cmd = new Command(first, second);
-    zorkul.processCommand(*cmd);
+    // handle go to direction command
+    if (first.compare("go") == 0 && (second.compare("east")==0||second.compare("west")==0||second.compare("north")==0||second.compare("south")==0)) {
+        validInput =true;
+        Command *cmd = new Command(first, second);
+        zorkul.processCommand(*cmd);
+        delete cmd;
+        getCurrentRoomDescription();
+        updateGUI();
 
-    getCurrentRoomDescription();
-    updateGUI();
+    }
+    //hanndle info/map/invetory/look command
+    if (first.compare("info")==0){
+        validInput =true;
 
-    bottomDisplay->setText("");
-    delete cmd;
+    }else if(first.compare("map")==0){
+        validInput =true;
+        mapButtonClicked();
+    }
+    else if (first.compare("inventory")==0){
+        validInput =true;
+
+    }
+    else if (first.compare("look")==0){
+        validInput =true;
+        getCurrentRoomDescription();
+
+    }
+
+    if(validInput==false){
+        bottomDisplayInvalidInput();
+    }
+
+}
+void GUI::bottomDisplayInvalidInput(){
+    toprightpane->append("invalid input");
+
+
 }
 
 void GUI::drawFloor() {

@@ -27,18 +27,23 @@ public:
     GUI(QWidget *parent = 0);
 
 private slots:
-void northButtonClicked();
-void southButtonClicked();
-void eastButtonClicked();
-void westButtonClicked();
-void goButtonCommand(string direction, QString text);
-void qbutclicked();
-void getCurrentRoomDescription();
-void updateGUI();
-void cmdLineEnterPressed();
-void drawFloor();
-void drawWall();
-void drawDoor();
+    void northButtonClicked();
+    void southButtonClicked();
+    void eastButtonClicked();
+    void westButtonClicked();
+    void goButtonCommand(string direction, QString text);
+    void infoButtonClicked();
+    void mapButtonClicked();
+    void invButtonClicked();
+    void lookButtonClicked();
+    void qbutclicked();
+    void getCurrentRoomDescription();
+    void updateGUI();
+    void cmdLineEnterPressed();
+    void drawFloor();
+    void drawWall();
+    void drawDoor();
+    void bottomDisplayInvalidInput();
 
 private:
 
@@ -65,6 +70,10 @@ private:
     QLineEdit *bottomDisplay;
     QTextEdit  *toprightpane;
     QLineEdit *botrightpane;
+    QPushButton *info_button ;
+    QPushButton *map_button ;
+    QPushButton *inv_button ;
+    QPushButton *look_button ;
     QPushButton *n_button;
     QPushButton *s_button;
     QPushButton *e_button;
