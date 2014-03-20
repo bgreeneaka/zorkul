@@ -5,6 +5,9 @@
 #include "Parser.h"
 #include "Room.h"
 #include "item.h"
+#include "weapon.h"
+#include "potion.h"
+#include "armor.h"
 #include "Character.h"
 #include <iostream>
 #include <string>
@@ -16,6 +19,7 @@ private:
 	Parser parser;
 	Room *currentRoom;
     Character *player;
+    vector <Item> vectorOfItems;
 	void createRooms();
 	void printWelcome();
     //bool processCommand(Command command);

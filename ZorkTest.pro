@@ -15,7 +15,10 @@ SOURCES += \
     Parser.cpp \
     Room.cpp \
     ZorkUL.cpp \
-    GUI.cpp
+    GUI.cpp \
+    armor.cpp \
+    potion.cpp \
+    weapon.cpp
 
 OTHER_FILES +=
 
@@ -27,7 +30,10 @@ HEADERS += \
     Parser.h \
     Room.h \
     ZorkUL.h \
-    GUI.h
+    GUI.h \
+    armor.h \
+    potion.h \
+    weapon.h
 
 FORMS    += rooms.ui \
     rooms.ui

@@ -18,6 +18,7 @@ int main(int argc, char *argv[]) {
 }
 
 ZorkUL::ZorkUL() {
+    createItems();
     createRooms();
 }
 
@@ -26,18 +27,23 @@ void ZorkUL::createRooms()  {
     player = new Character("me");
 
     a = new Room("a");
-    a->addItem(new Item("x", 1, 11));
-    a->addItem(new Item("y", 2, 22));
-    b = new Room("b");
-    b->addItem(new Item("xx", 3, 33));
-    b->addItem(new Item("yy", 4, 44));
-    c = new Room("c");
-    d = new Room("d");
-    e = new Room("e");
-    f = new Room("f");
-    g = new Room("g");
-    h = new Room("h");
-    i = new Room("i");
+            a->addItem(&vectorOfItems[0]);
+        b = new Room("b");
+            b->addItem(&vectorOfItems[1]);
+        c = new Room("c");
+            c->addItem(&vectorOfItems[2]);
+        d = new Room("d");
+            d->addItem(&vectorOfItems[3]);
+        e = new Room("e");
+            e->addItem(&vectorOfItems[4]);
+        f = new Room("f");
+            f->addItem(&vectorOfItems[5]);
+        g = new Room("g");
+            g->addItem(&vectorOfItems[6]);
+        h = new Room("h");
+            h->addItem(&vectorOfItems[7]);
+        i = new Room("i");
+            i->addItem(&vectorOfItems[8]);
 
     //             (N, E, S, W)
     a->setExits(f, b, d, c);
@@ -215,4 +221,28 @@ vector<string> ZorkUL::getRoomExits(){
 
 string ZorkUL::getRoomDescription(){
     return currentRoom->longDescription();
+}
+void ZorkUL :: createItems(){
+    Item  *itemA, *itemB, *itemC, *itemD, *itemE, *itemF, *itemG, *itemH,*itemI;
+
+    itemA = new Weapon("Sword", 1, 11,0,10);
+    vectorOfItems.push_back(*itemA);
+    itemB = new Weapon("Axe", 1, 11,0,10);
+    vectorOfItems.push_back(*itemB);
+    itemC = new Weapon("Hammer", 1, 11,0,10);
+    vectorOfItems.push_back(*itemC);
+    itemD = new Potion("Invisibility Potion", 1, 11,0,10,"Invisibility");
+    vectorOfItems.push_back(*itemD);
+    itemE = new Potion("Elixir of Life", 1, 11,0,10,"Health Increase");
+    vectorOfItems.push_back(*itemE);
+    itemF = new Potion("Death-Cap Draught", 1, 11,0,10,"Posion");
+    vectorOfItems.push_back(*itemF);
+    itemG = new Armor("Barbute", 1, 11,0,10);
+    vectorOfItems.push_back(*itemG);
+    itemH = new Armor("Gauntlet", 1, 11,0,10);
+    vectorOfItems.push_back(*itemH);
+    itemI = new Armor("Plackart", 1, 11,0,10);
+    vectorOfItems.push_back(*itemI);
+
+    random_shuffle(vectorOfItems.begin(),vectorOfItems.end());
 }
