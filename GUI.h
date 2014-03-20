@@ -36,7 +36,7 @@ private slots:
     void mapButtonClicked();
     void invButtonClicked();
     void lookButtonClicked();
-    void qbutclicked();
+    void qbutclicked(string firstWord, string secondWord);
     void getCurrentRoomDescription();
     void updateGUI();
     void cmdLineEnterPressed();

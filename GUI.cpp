@@ -84,7 +84,8 @@ GUI::GUI(QWidget *parent) :
     drawFloor();
     drawWall();
     drawDoor();
-
+    //this->setFixedSize(1300,1300);
+    // mainLayout->setSizeConstraint(QLayout::SetFixedSize);
     mainLayout->setSizeConstraint(QLayout::SetFixedSize);
 
     controlsLayout->addWidget(toprightpane, 1, 0,4,4);
@@ -105,50 +106,60 @@ GUI::GUI(QWidget *parent) :
 }
 
 void GUI::northButtonClicked() {
-    string direction= "north";
-    QString text =  "north";
-    goButtonCommand(direction,text);
+    qbutclicked("go", "north");
+    //string direction= "north";
+    //QString text =  "north";
+    //goButtonCommand(direction,text);
 }
 
 void GUI::southButtonClicked(){
-    string direction= "south";
-    QString text =  "south";
-    goButtonCommand(direction,text);
+    qbutclicked("go", "south");
+    // string direction= "south";
+    //QString text =  "south";
+    //goButtonCommand(direction,text);
 }
 
 void GUI::eastButtonClicked(){
-    string direction= "east";
-    QString text =  "east";
-    goButtonCommand(direction,text);
+    qbutclicked("go", "east");
+    // string direction= "east";
+    //QString text =  "east";
+    //goButtonCommand(direction,text);
 }
 
 void GUI::westButtonClicked(){
-    string direction= "west";
-    QString text =  "west";
-    goButtonCommand(direction,text);
+    qbutclicked("go", "west");
+    //string direction= "west";
+    //QString text =  "west";
+    //goButtonCommand(direction,text);
 }
 
 void GUI::infoButtonClicked(){
-
+    qbutclicked("info", "");
 
 }
 void GUI::mapButtonClicked(){
-    toprightpane->clear();
-    toprightpane->append("  Map of world:");
-    toprightpane->append(" [h] --- [f] --- [g]");
-    toprightpane->append("           |         ");
-    toprightpane->append("           |         ") ;
-    toprightpane->append("  [c] --- [a] --- [b]");
-    toprightpane->append("           |         ") ;
-    toprightpane->append("           |         ") ;
-    toprightpane->append("  [i] --- [d] --- [e]") ;
+
+
+    qbutclicked("map", "");
+    // Command *cmd = new Command
+    //string tempStr = zorkul.processCommand(*cmd);
+    //QString map = tempStr.c_str();
+    //toprightpane->setText(map);
+    //delete cmd;
+
 }
 void GUI::invButtonClicked(){
 
 
 }
 void GUI::lookButtonClicked(){
-    getCurrentRoomDescription();
+    qbutclicked("look", "");
+    //    getCurrentRoomDescription();
+    //    Command *cmd = new Command("map", "");
+    //    string tempStr = zorkul.processCommand(*cmd);
+    //    QString map = tempStr.c_str();
+    //    toprightpane->setText(map);
+    //    delete cmd;
 
 }
 
@@ -158,8 +169,12 @@ void GUI::goButtonCommand(string direction, QString text){
     updateGUI();
 }
 
-void GUI::qbutclicked(){   
-    //m_button->setText("Example");
+void GUI::qbutclicked(string firstWord, string secondWord){
+    Command *cmd = new Command(firstWord, secondWord);
+    string tempStr = zorkul.processCommand(*cmd);
+    QString zorkULQstrR = tempStr.c_str();
+    toprightpane->setText(zorkULQstrR);
+    delete cmd;
 }
 
 void GUI::getCurrentRoomDescription(){
@@ -202,38 +217,49 @@ void GUI::cmdLineEnterPressed(){
         second = "";
         bottomDisplayInvalidInput();
     }
-
+    ;
     // handle go to direction command
-   // if (first.compare("go") == 0 && (second.compare("east")==0||second.compare("west")==0||second.compare("north")==0||second.compare("south")==0)) {
-        validInput =true;
-        Command *cmd = new Command(first, second);
-        zorkul.processCommand(*cmd);
+    // if (first.compare("go") == 0 && (second.compare("east")==0||second.compare("west")==0||second.compare("north")==0||second.compare("south")==0)) {
+    validInput =true;
+    Command *cmd = new Command(first, second);
+    //if(zorkul.processCommand(*cmd).compare("invalid input")==0){
+        //    toprightpane->append(fst);
+        //    toprightpane->append(snd);
+      //  toprightpane->append("invalid input");
+    //}
+
+
+        string tempStr = zorkul.processCommand(*cmd);
+        QString zorkULQstrR = tempStr.c_str();
+        toprightpane->setText(zorkULQstrR);
         delete cmd;
-        getCurrentRoomDescription();
-        updateGUI();
 
-//    }
-//    //hanndle info/map/invetory/look command
-//    if (first.compare("info")==0){
-//        validInput =true;
 
-//    }else if(first.compare("map")==0){
-//        validInput =true;
-//        mapButtonClicked();
-//    }
-//    else if (first.compare("inventory")==0){
-//        validInput =true;
+    //getCurrentRoomDescription();
+    //updateGUI();
 
-//    }
-//    else if (first.compare("look")==0){
-//        validInput =true;
-//        getCurrentRoomDescription();
+    //    }
+    //    //hanndle info/map/invetory/look command
+    //    if (first.compare("info")==0){
+    //        validInput =true;
 
-//    }
+    //    }else if(first.compare("map")==0){
+    //        validInput =true;
+    //        mapButtonClicked();
+    //    }
+    //    else if (first.compare("inventory")==0){
+    //        validInput =true;
 
-//    if(validInput==false){
-//        bottomDisplayInvalidInput();
-//    }
+    //    }
+    //    else if (first.compare("look")==0){
+    //        validInput =true;
+    //        getCurrentRoomDescription();
+
+    //    }
+
+    //    if(validInput==false){
+    //        bottomDisplayInvalidInput();
+    //    }
 
 }
 void GUI::bottomDisplayInvalidInput(){
