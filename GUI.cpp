@@ -181,7 +181,7 @@ void GUI::cmdLineEnterPressed(){
     string userinput = QuserInput.toLocal8Bit().constData();
     string first, second;
     vector<string> cmds;
-    bool validInput = false;
+    bool validInput = true;
 
     std::istringstream ss(userinput);
     string token;
@@ -204,7 +204,7 @@ void GUI::cmdLineEnterPressed(){
     }
 
     // handle go to direction command
-    if (first.compare("go") == 0 && (second.compare("east")==0||second.compare("west")==0||second.compare("north")==0||second.compare("south")==0)) {
+   // if (first.compare("go") == 0 && (second.compare("east")==0||second.compare("west")==0||second.compare("north")==0||second.compare("south")==0)) {
         validInput =true;
         Command *cmd = new Command(first, second);
         zorkul.processCommand(*cmd);
@@ -212,28 +212,28 @@ void GUI::cmdLineEnterPressed(){
         getCurrentRoomDescription();
         updateGUI();
 
-    }
-    //hanndle info/map/invetory/look command
-    if (first.compare("info")==0){
-        validInput =true;
+//    }
+//    //hanndle info/map/invetory/look command
+//    if (first.compare("info")==0){
+//        validInput =true;
 
-    }else if(first.compare("map")==0){
-        validInput =true;
-        mapButtonClicked();
-    }
-    else if (first.compare("inventory")==0){
-        validInput =true;
+//    }else if(first.compare("map")==0){
+//        validInput =true;
+//        mapButtonClicked();
+//    }
+//    else if (first.compare("inventory")==0){
+//        validInput =true;
 
-    }
-    else if (first.compare("look")==0){
-        validInput =true;
-        getCurrentRoomDescription();
+//    }
+//    else if (first.compare("look")==0){
+//        validInput =true;
+//        getCurrentRoomDescription();
 
-    }
+//    }
 
-    if(validInput==false){
-        bottomDisplayInvalidInput();
-    }
+//    if(validInput==false){
+//        bottomDisplayInvalidInput();
+//    }
 
 }
 void GUI::bottomDisplayInvalidInput(){
