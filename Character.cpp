@@ -18,6 +18,7 @@ int Character::isItemInCharacter(string description) {
         }
     }
     return -1;
+    //iuhfdasfadfdsfdafa
 }
 
 Item* Character::getItem(int location) {
