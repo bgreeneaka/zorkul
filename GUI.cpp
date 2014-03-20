@@ -203,39 +203,14 @@ void GUI::cmdLineEnterPressed(){
         bottomDisplayInvalidInput();
     }
 
-    // handle go to direction command
-   // if (first.compare("go") == 0 && (second.compare("east")==0||second.compare("west")==0||second.compare("north")==0||second.compare("south")==0)) {
-        validInput =true;
-        Command *cmd = new Command(first, second);
-        zorkul.processCommand(*cmd);
-        delete cmd;
-        getCurrentRoomDescription();
-        updateGUI();
-
-//    }
-//    //hanndle info/map/invetory/look command
-//    if (first.compare("info")==0){
-//        validInput =true;
-
-//    }else if(first.compare("map")==0){
-//        validInput =true;
-//        mapButtonClicked();
-//    }
-//    else if (first.compare("inventory")==0){
-//        validInput =true;
-
-//    }
-//    else if (first.compare("look")==0){
-//        validInput =true;
-//        getCurrentRoomDescription();
-
-//    }
-
-//    if(validInput==false){
-//        bottomDisplayInvalidInput();
-//    }
-
+    validInput =true;
+    Command *cmd = new Command(first, second);
+    zorkul.processCommand(*cmd);
+    delete cmd;
+    getCurrentRoomDescription();
+    updateGUI();
 }
+
 void GUI::bottomDisplayInvalidInput(){
     toprightpane->append("invalid input");
 
@@ -289,4 +264,3 @@ void GUI::drawDoor() {
         }
     }
 }
-
