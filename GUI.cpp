@@ -106,7 +106,6 @@ void GUI::westButtonClicked(){
 
 void GUI::goButtonCommand(string direction, QString text){  
     zorkul.go(direction);
-    bottomDisplay->setText(text);
     getCurrentRoomDescription();
     updateGUI();
 }
