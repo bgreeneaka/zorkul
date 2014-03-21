@@ -105,51 +105,35 @@ GUI::GUI(QWidget *parent) :
 }
 
 void GUI::northButtonClicked() {
-    string direction= "north";
-    QString text =  "north";
-    goButtonCommand(direction,text);
+    qbutclicked("go", "north");
 }
 
 void GUI::southButtonClicked(){
-    string direction= "south";
-    QString text =  "south";
-    goButtonCommand(direction,text);
+    qbutclicked("go", "south");
 }
 
 void GUI::eastButtonClicked(){
-    string direction= "east";
-    QString text =  "east";
-    goButtonCommand(direction,text);
+    qbutclicked("go", "east");
 }
 
 void GUI::westButtonClicked(){
-    string direction= "west";
-    QString text =  "west";
-    goButtonCommand(direction,text);
+    qbutclicked("go", "west");
 }
 
 void GUI::infoButtonClicked(){
-
+    qbutclicked("info", "");
 
 }
-void GUI::mapButtonClicked(){
-    toprightpane->clear();
-    toprightpane->append("  Map of world:");
-    toprightpane->append(" [h] --- [f] --- [g]");
-    toprightpane->append("           |         ");
-    toprightpane->append("           |         ") ;
-    toprightpane->append("  [c] --- [a] --- [b]");
-    toprightpane->append("           |         ") ;
-    toprightpane->append("           |         ") ;
-    toprightpane->append("  [i] --- [d] --- [e]") ;
+void GUI::mapButtonClicked(){    
+    qbutclicked("map", "");
+
 }
 void GUI::invButtonClicked(){
 
 
 }
 void GUI::lookButtonClicked(){
-    getCurrentRoomDescription();
-
+    qbutclicked("look", "");
 }
 
 void GUI::goButtonCommand(string direction, QString text){  
@@ -158,8 +142,12 @@ void GUI::goButtonCommand(string direction, QString text){
     updateGUI();
 }
 
-void GUI::qbutclicked(){   
-    //m_button->setText("Example");
+void GUI::qbutclicked(string firstWord, string secondWord){
+    Command *cmd = new Command(firstWord, secondWord);
+    string tempStr = zorkul.processCommand(*cmd);
+    QString zorkULQstrR = tempStr.c_str();
+    toprightpane->setText(zorkULQstrR);
+    delete cmd;
 }
 
 void GUI::getCurrentRoomDescription(){
@@ -204,17 +192,16 @@ void GUI::cmdLineEnterPressed(){
     }
 
     validInput =true;
+
     Command *cmd = new Command(first, second);
-    zorkul.processCommand(*cmd);
+    string tempStr = zorkul.processCommand(*cmd);
+    QString zorkULQstrR = tempStr.c_str();
+    toprightpane->setText(zorkULQstrR);
     delete cmd;
-    getCurrentRoomDescription();
-    updateGUI();
 }
 
 void GUI::bottomDisplayInvalidInput(){
     toprightpane->append("invalid input");
-
-
 }
 
 void GUI::drawFloor() {

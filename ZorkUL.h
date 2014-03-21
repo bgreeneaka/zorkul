@@ -24,7 +24,7 @@ private:
 	void printWelcome();
     //bool processCommand(Command command);
 	void printHelp();
-	void goRoom(Command command);
+    string goRoom(Command command);
     void createItems();
     void displayItems();
 
@@ -32,7 +32,7 @@ public:
 	ZorkUL();
 	void play();
 	string go(string direction);
-    bool processCommand(Command command);
+    string processCommand(Command command);
     vector<string> getRoomExits();
     string getRoomDescription();
 };
