@@ -35,14 +35,12 @@ void Character::removeItem(int location) {
 //}
 
 string Character::longDescription() {
-    cout << "inventory: " << endl;
-    string items = "";
+    string items = "inventory: \n";
 
     for (unsigned int i = 0; i < itemsInCharacter.size(); i++) {
         items += " "  + itemsInCharacter[i].getShortDescription() + "\n";
     }
 
-    cout << items;
     return items;
 }
 

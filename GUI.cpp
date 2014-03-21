@@ -129,7 +129,7 @@ void GUI::mapButtonClicked(){
 
 }
 void GUI::invButtonClicked(){
-
+    qbutclicked("inventory", "");
 
 }
 void GUI::lookButtonClicked(){
