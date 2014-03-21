@@ -20,4 +20,3 @@ int Armor :: getArmorStrength(){
 int Armor :: getArmorTile(){
     return 0;
 }
-
