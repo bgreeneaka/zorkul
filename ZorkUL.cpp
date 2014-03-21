@@ -19,7 +19,7 @@ int main(int argc, char *argv[]) {
 
 ZorkUL::ZorkUL() {
     createItems();
-    createRooms(); // test git merge
+    createRooms();
 }
 
 void ZorkUL::createRooms()  {
