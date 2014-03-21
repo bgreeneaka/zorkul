@@ -31,7 +31,6 @@ private slots:
     void southButtonClicked();
     void eastButtonClicked();
     void westButtonClicked();
-    void goButtonCommand(string direction, QString text);
     void infoButtonClicked();
     void mapButtonClicked();
     void invButtonClicked();
@@ -43,7 +42,7 @@ private slots:
     void drawFloor();
     void drawWall();
     void drawDoor();
-    void bottomDisplayInvalidInput();
+    void setupDoors();
 
 private:
 

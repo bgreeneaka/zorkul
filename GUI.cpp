@@ -33,12 +33,6 @@ GUI::GUI(QWidget *parent) :
     toprightfont.setPointSize(toprightfont.pointSize() + 8);
     toprightpane->setFont(toprightfont);
 
-    n_button = new QPushButton("North", this);
-    s_button = new QPushButton("South", this);
-    e_button = new QPushButton("East", this);
-    w_button = new QPushButton("West", this);
-
-
     //new butttons - map, info character etc
     info_button = new QPushButton("Info", this);
     map_button = new QPushButton("Map", this);
@@ -47,14 +41,6 @@ GUI::GUI(QWidget *parent) :
 
 
     //new butttons - map, info character etc
-    n_button->setGeometry(QRect(QPoint(100, 100),
-                                QSize(200, 50)));
-    s_button->setGeometry(QRect(QPoint(100, 100),
-                                QSize(200, 50)));
-    e_button->setGeometry(QRect(QPoint(100, 100),
-                                QSize(200, 50)));
-    w_button->setGeometry(QRect(QPoint(100, 100),
-                                QSize(200, 50)));
     info_button->setGeometry(QRect(QPoint(100, 100),
                                    QSize(200, 50)));
     map_button->setGeometry(QRect(QPoint(100, 100),
@@ -65,10 +51,6 @@ GUI::GUI(QWidget *parent) :
                                    QSize(200, 50)));
 
     // Connect button signal to appropriate slot
-    connect(n_button, SIGNAL(released()), this, SLOT(northButtonClicked()));
-    connect(s_button, SIGNAL(released()), this, SLOT(southButtonClicked()));
-    connect(e_button, SIGNAL(released()), this, SLOT(eastButtonClicked()));
-    connect(w_button, SIGNAL(released()), this, SLOT(westButtonClicked()));
     connect(info_button, SIGNAL(released()), this, SLOT(infoButtonClicked()));
     connect(map_button, SIGNAL(released()), this, SLOT(mapButtonClicked()));
     connect(inv_button, SIGNAL(released()), this, SLOT(invButtonClicked()));
@@ -84,6 +66,7 @@ GUI::GUI(QWidget *parent) :
     drawFloor();
     drawWall();
     drawDoor();
+    setupDoors();
 
     mainLayout->setSizeConstraint(QLayout::SetFixedSize);
 
@@ -93,10 +76,6 @@ GUI::GUI(QWidget *parent) :
     controlsLayout->addWidget(inv_button, 0,2);
     controlsLayout->addWidget(look_button, 0,3);
     mainLayout->addItem(controlsLayout,0,3,2,3);
-    mainLayout->addWidget(n_button,0,1);
-    mainLayout->addWidget(s_button,2,1);
-    mainLayout->addWidget(w_button,1,0);
-    mainLayout->addWidget(e_button,1,2);
     mainLayout->addItem(roomLayout,1 ,1);
     mainLayout->addWidget(bottomDisplay, 3, 0, 1, 6);
 
@@ -136,17 +115,12 @@ void GUI::lookButtonClicked(){
     qbutclicked("look", "");
 }
 
-void GUI::goButtonCommand(string direction, QString text){  
-    zorkul.go(direction);
-    getCurrentRoomDescription();
-    updateGUI();
-}
-
 void GUI::qbutclicked(string firstWord, string secondWord){
     Command *cmd = new Command(firstWord, secondWord);
     string tempStr = zorkul.processCommand(*cmd);
     QString zorkULQstrR = tempStr.c_str();
     toprightpane->setText(zorkULQstrR);
+    updateGUI();
     delete cmd;
 }
 
@@ -169,7 +143,6 @@ void GUI::cmdLineEnterPressed(){
     string userinput = QuserInput.toLocal8Bit().constData();
     string first, second;
     vector<string> cmds;
-    bool validInput = true;
 
     std::istringstream ss(userinput);
     string token;
@@ -188,10 +161,7 @@ void GUI::cmdLineEnterPressed(){
     else{
         first = "";
         second = "";
-        bottomDisplayInvalidInput();
     }
-
-    validInput =true;
 
     Command *cmd = new Command(first, second);
     string tempStr = zorkul.processCommand(*cmd);
@@ -200,44 +170,60 @@ void GUI::cmdLineEnterPressed(){
     delete cmd;
 }
 
-void GUI::bottomDisplayInvalidInput(){
-    toprightpane->append("invalid input");
-}
-
 void GUI::drawFloor() {
     for (unsigned int i = 0; i < 10; i++) {
         for (unsigned int j = 0; j < 10; j++) {
-            QLabel *floorLabel = new QLabel();
-            floorLabel->setPixmap(QPixmap("://resources/images/rooms/pedestal_full.png"));
+            QPushButton *floorLabel = new QPushButton();
+            floorLabel->setIcon(QIcon("://resources/images/rooms/pedestal_full.png"));
+            floorLabel->setFlat(true);
+            floorLabel->setIconSize(QSize(32, 32));
             roomLayout->addWidget(floorLabel, i, j);
         }
     }
 }
 
+void GUI::setupDoors() {
+    QPushButton *eastButton = dynamic_cast<QPushButton*>(roomLayout->itemAtPosition(4, 9)->widget());
+    connect(eastButton, SIGNAL(released()), this, SLOT(eastButtonClicked()));
+
+    QPushButton *westButton = dynamic_cast<QPushButton*>(roomLayout->itemAtPosition(4, 0)->widget());
+    connect(westButton, SIGNAL(released()), this, SLOT(westButtonClicked()));
+
+    QPushButton *northButton = dynamic_cast<QPushButton*>(roomLayout->itemAtPosition(0, 5)->widget());
+    connect(northButton, SIGNAL(released()), this, SLOT(northButtonClicked()));
+
+    QPushButton *southButton = dynamic_cast<QPushButton*>(roomLayout->itemAtPosition(9, 5)->widget());
+    connect(southButton, SIGNAL(released()), this, SLOT(southButtonClicked()));
+}
+
 void GUI::drawWall() {
     int j = 0;
     for (unsigned int i = 0; i < 10; i++) {
-        QLabel *wallLabel = new QLabel();
-        wallLabel->setPixmap(QPixmap("://resources/images/rooms/brick_brown0.png"));
-        roomLayout->addWidget(wallLabel, i, j);
+        QPushButton *wallLabel = dynamic_cast<QPushButton*>(roomLayout->itemAtPosition(i, j)->widget());
+        wallLabel->setFlat(true);
+        wallLabel->setIconSize(QSize(32, 32));
+        wallLabel->setIcon(QIcon("://resources/images/rooms/brick_brown0.png"));
     }
     j = 9;
     for (unsigned int i = 0; i < 10; i++) {
-        QLabel *wallLabel = new QLabel();
-        wallLabel->setPixmap(QPixmap("://resources/images/rooms/brick_brown0.png"));
-        roomLayout->addWidget(wallLabel, i, j);
+        QPushButton *wallLabel = dynamic_cast<QPushButton*>(roomLayout->itemAtPosition(i, j)->widget());
+        wallLabel->setFlat(true);
+        wallLabel->setIconSize(QSize(32, 32));
+        wallLabel->setIcon(QIcon("://resources/images/rooms/brick_brown0.png"));
     }
     j = 9;
     for (unsigned int i = 0; i < 10; i++) {
-        QLabel *wallLabel = new QLabel();
-        wallLabel->setPixmap(QPixmap("://resources/images/rooms/brick_brown0.png"));
-        roomLayout->addWidget(wallLabel, j, i);
+        QPushButton *wallLabel = dynamic_cast<QPushButton*>(roomLayout->itemAtPosition(j, i)->widget());
+        wallLabel->setFlat(true);
+        wallLabel->setIconSize(QSize(32, 32));
+        wallLabel->setIcon(QIcon("://resources/images/rooms/brick_brown0.png"));
     }
     j = 0;
     for (unsigned int i = 0; i < 10; i++) {
-        QLabel *wallLabel = new QLabel();
-        wallLabel->setPixmap(QPixmap("://resources/images/rooms/brick_brown0.png"));
-        roomLayout->addWidget(wallLabel, j, i);
+        QPushButton *wallLabel = dynamic_cast<QPushButton*>(roomLayout->itemAtPosition(j, i)->widget());
+        wallLabel->setFlat(true);
+        wallLabel->setIconSize(QSize(32, 32));
+        wallLabel->setIcon(QIcon("://resources/images/rooms/brick_brown0.png"));
     }
 }
 
@@ -245,9 +231,28 @@ void GUI::drawDoor() {
     vector<string> exits = zorkul.getRoomExits();
     for (unsigned int i = 0; i < exits.size(); i++) {
         if (exits[i].compare("east") == 0) {
-            QPushButton *doorButton = new QPushButton();
-            doorButton->setIcon(QIcon("://resources/images/rooms/closed_door.png"));
-            roomLayout->addWidget(doorButton, 4, 9);
+            QPushButton *eastButton = dynamic_cast<QPushButton*>(roomLayout->itemAtPosition(4, 9)->widget());
+            eastButton->setFlat(true);
+            eastButton->setIconSize(QSize(32, 32));
+            eastButton->setIcon(QIcon("://resources/images/rooms/closed_door.png"));
+        }
+        if (exits[i].compare("west") == 0) {
+            QPushButton *westButton = dynamic_cast<QPushButton*>(roomLayout->itemAtPosition(4, 0)->widget());
+            westButton->setFlat(true);
+            westButton->setIconSize(QSize(32, 32));
+            westButton->setIcon(QIcon("://resources/images/rooms/closed_door.png"));
+        }
+        if (exits[i].compare("north") == 0) {
+            QPushButton *northButton = dynamic_cast<QPushButton*>(roomLayout->itemAtPosition(0, 5)->widget());
+            northButton->setFlat(true);
+            northButton->setIconSize(QSize(32, 32));
+            northButton->setIcon(QIcon("://resources/images/rooms/closed_door.png"));
+        }
+        if (exits[i].compare("south") == 0) {
+            QPushButton *southButton = dynamic_cast<QPushButton*>(roomLayout->itemAtPosition(9, 5)->widget());
+            southButton->setFlat(true);
+            southButton->setIconSize(QSize(32, 32));
+            southButton->setIcon(QIcon("://resources/images/rooms/closed_door.png"));
         }
     }
 }

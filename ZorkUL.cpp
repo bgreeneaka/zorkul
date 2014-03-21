@@ -56,13 +56,6 @@ void ZorkUL::createRooms()  {
     currentRoom = a;
 }
 
-void ZorkUL::printWelcome() {
-    cout << "start"<< endl;
-    cout << "info for help"<< endl;
-    cout << endl;
-    cout << currentRoom->longDescription() << endl;
-}
-
 /**
  * Given a command, process (that is: execute) the command.
  */
@@ -71,8 +64,8 @@ string ZorkUL::processCommand(Command command) {
     string commandWord = command.getCommandWord();
     if (commandWord.compare("info") == 0){
         return "reliable info here";
-        printHelp();
     }
+
     else if (commandWord.compare("map") == 0)
     {
         string output = "Map of the world\n";
@@ -92,7 +85,7 @@ string ZorkUL::processCommand(Command command) {
     else if (commandWord.compare("take") == 0)
     {
         if (!command.hasSecondWord()) {
-            cout << "incomplete input"<< endl;
+            return "incomplete input";
         }
         else
             if (command.hasSecondWord()) {
