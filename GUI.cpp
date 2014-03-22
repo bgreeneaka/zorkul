@@ -340,6 +340,5 @@ void GUI::drawItem(){
             Item_botton->setIconSize(QSize(32, 32));
             Item_botton->setIcon(QIcon("://resources/images/items/potions/emerald.png"));
         }
-
     }
 }
