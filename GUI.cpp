@@ -177,6 +177,7 @@ void GUI::cmdLineEnterPressed(){
     string tempStr = zorkul.processCommand(*cmd);
     QString zorkULQstrR = tempStr.c_str();
     toprightpane->setText(zorkULQstrR);
+    updateGUI();
     delete cmd;
 }
 
