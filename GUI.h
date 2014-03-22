@@ -47,7 +47,7 @@ private slots:
     void setupDoors();
     void drawItem();
     void itemClick();
-
+    void keyPressEvent(QKeyEvent *event);
 
 private:
 

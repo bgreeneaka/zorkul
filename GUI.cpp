@@ -17,6 +17,11 @@ GUI::GUI(QWidget *parent) :
     bottomDisplay->setFont(font);
     bottomDisplay->setFocus();
 
+    // signals listeneres for keys -- start
+    //connect(bottomDisplay, SIGNAL(Key_UpPressed()), this, SLOT(northButtonClicked()));
+
+    // signals listeneres for keys --- end
+
     //top right display
     toprightpane = new QTextEdit("");
 
@@ -34,10 +39,10 @@ GUI::GUI(QWidget *parent) :
     toprightpane->setFont(toprightfont);
 
     //new butttons - map, info character etc
-    info_button = new QPushButton("Info", this);
-    map_button = new QPushButton("Map", this);
-    inv_button = new QPushButton("Inventory", this);
-    look_button = new QPushButton("Look", this);
+    info_button = new QPushButton("Info(F1)", this);
+    map_button = new QPushButton("Map(F2)", this);
+    inv_button = new QPushButton("Inventory(F3)", this);
+    look_button = new QPushButton("Look(F4)", this);
 
 
     //new butttons - map, info character etc
@@ -277,12 +282,12 @@ void GUI:: itemClick(){
 void GUI::drawItem(){
     vector<Item> items = zorkul.getItemsInRoom();
 
-        if(zorkul.displayItem().compare("no items in room")==0){
-            QPushButton *Item_botton = dynamic_cast<QPushButton*>(roomLayout->itemAtPosition(5, 5)->widget());
-            Item_botton->setFlat(true);
-            Item_botton->setIconSize(QSize(32, 32));
-            Item_botton->setIcon(QIcon("://resources/images/rooms/pedestal_full.png"));
-        }
+    if(zorkul.displayItem().compare("no items in room")==0){
+        QPushButton *Item_botton = dynamic_cast<QPushButton*>(roomLayout->itemAtPosition(5, 5)->widget());
+        Item_botton->setFlat(true);
+        Item_botton->setIconSize(QSize(32, 32));
+        Item_botton->setIcon(QIcon("://resources/images/rooms/pedestal_full.png"));
+    }
 
     for (unsigned int i = 0; i < items.size(); i++) {
         if (items[i].getShortDescription().compare("Sword") == 0) {
@@ -341,4 +346,38 @@ void GUI::drawItem(){
             Item_botton->setIcon(QIcon("://resources/images/items/potions/emerald.png"));
         }
     }
+
+
+}
+
+
+void GUI::keyPressEvent(QKeyEvent *event)
+{
+
+switch(event->key()){
+case Qt::Key_Up:
+northButtonClicked();
+break;
+case Qt::Key_Direction_L:
+northButtonClicked();
+break;
+case Qt::Key_Right:
+northButtonClicked();
+break;
+case Qt::Key_Down:
+southButtonClicked();
+break;
+case Qt::Key_F1:
+infoButtonClicked();
+break;
+case Qt::Key_F2:
+mapButtonClicked();
+break;
+case Qt::Key_F3:
+invButtonClicked();
+break;
+case Qt::Key_F4:
+lookButtonClicked();
+break;
+}
 }
