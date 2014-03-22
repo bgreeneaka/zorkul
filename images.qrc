@@ -24,5 +24,6 @@
         <file>resources/images/items/weapons/bastard_sword.png</file>
         <file>resources/images/items/weapons/battle_axe2.png</file>
         <file>resources/images/items/weapons/morningstar1.png</file>
+        <file>resources/images/rooms/elf_m.png</file>
     </qresource>
 </RCC>
