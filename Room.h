@@ -29,6 +29,7 @@ public:
     string displayItem();
     int isItemInRoom(string inString);
     Item removeItemFromRoom(int location);
+    vector<Item> getItemsInRoom();
 };
 
 #endif

@@ -6,6 +6,7 @@
 #include "Command.h"
 #include <string>
 #include "Room.h"
+#include "item.h"
 using namespace std;
 
 QT_BEGIN_NAMESPACE
@@ -35,6 +36,7 @@ private slots:
     void mapButtonClicked();
     void invButtonClicked();
     void lookButtonClicked();
+    void itemButtonClicked();
     void qbutclicked(string firstWord, string secondWord);
     void getCurrentRoomDescription();
     void updateGUI();
@@ -43,6 +45,9 @@ private slots:
     void drawWall();
     void drawDoor();
     void setupDoors();
+    void drawItem();
+    void itemClick();
+
 
 private:
 
@@ -77,6 +82,7 @@ private:
     QPushButton *s_button;
     QPushButton *e_button;
     QPushButton *w_button;
+    QPushButton *Item_botton;
 
     QGridLayout *mainLayout;
     QGridLayout *controlsLayout;

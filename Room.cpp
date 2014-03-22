@@ -100,6 +100,10 @@ Item Room::removeItemFromRoom(int location) {
     itemsInRoom.erase(itemsInRoom.begin()+location);
     return temp;
 }
+vector<Item> Room :: getItemsInRoom(){
+
+    return itemsInRoom;
+}
 
 
 

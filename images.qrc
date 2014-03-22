@@ -15,5 +15,14 @@
         <file>resources/images/rooms/closed_door.png</file>
         <file>resources/images/rooms/pedestal_full.png</file>
         <file>resources/images/rooms/brick_brown0.png</file>
+        <file>resources/images/items/armour/blue_dragon_scale_mail.png</file>
+        <file>resources/images/items/armour/chain_mail2.png</file>
+        <file>resources/images/items/armour/gold_dragon_armour.png</file>
+        <file>resources/images/items/potions/black.png</file>
+        <file>resources/images/items/potions/emerald.png</file>
+        <file>resources/images/items/potions/orange.png</file>
+        <file>resources/images/items/weapons/bastard_sword.png</file>
+        <file>resources/images/items/weapons/battle_axe2.png</file>
+        <file>resources/images/items/weapons/morningstar1.png</file>
     </qresource>
 </RCC>

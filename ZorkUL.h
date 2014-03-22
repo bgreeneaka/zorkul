@@ -26,7 +26,7 @@ private:
 	void printHelp();
     string goRoom(Command command);
     void createItems();
-    void displayItems();
+
 
 public:
 	ZorkUL();
@@ -35,6 +35,8 @@ public:
     string processCommand(Command command);
     vector<string> getRoomExits();
     string getRoomDescription();
+    vector<Item> getItemsInRoom();
+    string displayItem();
 };
 
 #endif

@@ -67,7 +67,9 @@ GUI::GUI(QWidget *parent) :
     drawFloor();
     drawWall();
     drawDoor();
+    drawItem();
     setupDoors();
+    itemClick();
 
     mainLayout->setSizeConstraint(QLayout::SetFixedSize);
 
@@ -116,6 +118,11 @@ void GUI::lookButtonClicked(){
     qbutclicked("look", "");
 }
 
+void GUI :: itemButtonClicked(){
+    vector<Item> items = zorkul.getItemsInRoom();
+    qbutclicked("take",items[0].getShortDescription());
+}
+
 void GUI::qbutclicked(string firstWord, string secondWord){
     Command *cmd = new Command(firstWord, secondWord);
     string tempStr = zorkul.processCommand(*cmd);
@@ -133,9 +140,11 @@ void GUI::getCurrentRoomDescription(){
 }
 
 void GUI::updateGUI(){
+    drawItem();
     drawFloor();
     drawWall();
     drawDoor();
+
     bottomDisplay->setFocus();
 }
 
@@ -256,5 +265,80 @@ void GUI::drawDoor() {
             southButton->setIconSize(QSize(32, 32));
             southButton->setIcon(QIcon("://resources/images/rooms/closed_door.png"));
         }
+    }
+}
+
+void GUI:: itemClick(){
+    QPushButton *Item_botton = dynamic_cast<QPushButton*>(roomLayout->itemAtPosition(5, 5)->widget());
+    connect(Item_botton, SIGNAL(released()), this, SLOT(itemButtonClicked()));
+}
+
+void GUI::drawItem(){
+    vector<Item> items = zorkul.getItemsInRoom();
+
+        if(zorkul.displayItem().compare("no items in room")==0){
+            QPushButton *Item_botton = dynamic_cast<QPushButton*>(roomLayout->itemAtPosition(5, 5)->widget());
+            Item_botton->setFlat(true);
+            Item_botton->setIconSize(QSize(32, 32));
+            Item_botton->setIcon(QIcon("://resources/images/rooms/pedestal_full.png"));
+        }
+
+    for (unsigned int i = 0; i < items.size(); i++) {
+        if (items[i].getShortDescription().compare("Sword") == 0) {
+            QPushButton *Item_botton = dynamic_cast<QPushButton*>(roomLayout->itemAtPosition(5, 5)->widget());
+            Item_botton->setFlat(true);
+            Item_botton->setIconSize(QSize(32, 32));
+            Item_botton->setIcon(QIcon("://resources/images/items/weapons/bastard_sword.png"));
+            //items.erase(items.begin());
+        }
+        else if (items[i].getShortDescription().compare("Axe") == 0) {
+            QPushButton *Item_botton = dynamic_cast<QPushButton*>(roomLayout->itemAtPosition(5, 5)->widget());
+            Item_botton->setFlat(true);
+            Item_botton->setIconSize(QSize(32, 32));
+            Item_botton->setIcon(QIcon("://resources/images/items/weapons/battle_axe2.png"));
+        }
+        else if (items[i].getShortDescription().compare("Hammer") == 0) {
+            QPushButton *Item_botton = dynamic_cast<QPushButton*>(roomLayout->itemAtPosition(5, 5)->widget());
+            Item_botton->setFlat(true);
+            Item_botton->setIconSize(QSize(32, 32));
+            Item_botton->setIcon(QIcon("://resources/images/items/weapons/morningstar1.png"));
+        }
+        else if (items[i].getShortDescription().compare("Gold Dragona Armour") == 0) {
+            QPushButton *Item_botton = dynamic_cast<QPushButton*>(roomLayout->itemAtPosition(5, 5)->widget());
+            Item_botton->setFlat(true);
+            Item_botton->setIconSize(QSize(32, 32));
+            Item_botton->setIcon(QIcon("://resources/images/items/armour/gold_dragon_armour.png"));
+        }
+        else if (items[i].getShortDescription().compare("Chain Mail Armour") == 0) {
+            QPushButton *Item_botton = dynamic_cast<QPushButton*>(roomLayout->itemAtPosition(5, 5)->widget());
+            Item_botton->setFlat(true);
+            Item_botton->setIconSize(QSize(32, 32));
+            Item_botton->setIcon(QIcon("://resources/images/items/armour/chain_mail2.png"));
+        }
+        else if (items[i].getShortDescription().compare("Blue Dragon Scale Armor") == 0) {
+            QPushButton *Item_botton = dynamic_cast<QPushButton*>(roomLayout->itemAtPosition(5, 5)->widget());
+            Item_botton->setFlat(true);
+            Item_botton->setIconSize(QSize(32, 32));
+            Item_botton->setIcon(QIcon("://resources/images/items/armour/blue_dragon_scale_mail.png"));
+        }
+        else if (items[i].getShortDescription().compare("Death-Cap Draught") == 0) {
+            QPushButton *Item_botton = dynamic_cast<QPushButton*>(roomLayout->itemAtPosition(5, 5)->widget());
+            Item_botton->setFlat(true);
+            Item_botton->setIconSize(QSize(32, 32));
+            Item_botton->setIcon(QIcon("://resources/images/items/potions/orange.png"));
+        }
+        else if (items[i].getShortDescription().compare("Elixir of Life") == 0) {
+            QPushButton *Item_botton = dynamic_cast<QPushButton*>(roomLayout->itemAtPosition(5, 5)->widget());
+            Item_botton->setFlat(true);
+            Item_botton->setIconSize(QSize(32, 32));
+            Item_botton->setIcon(QIcon("://resources/images/items/potions/emerald.png"));
+        }
+        else if (items[i].getShortDescription().compare("Invisibility Potion") == 0) {
+            QPushButton *Item_botton = dynamic_cast<QPushButton*>(roomLayout->itemAtPosition(5, 5)->widget());
+            Item_botton->setFlat(true);
+            Item_botton->setIconSize(QSize(32, 32));
+            Item_botton->setIcon(QIcon("://resources/images/items/potions/emerald.png"));
+        }
+
     }
 }

@@ -199,12 +199,19 @@ void ZorkUL :: createItems(){
     vectorOfItems.push_back(*itemE);
     itemF = new Potion("Death-Cap Draught", 1, 11,0,10,"Posion");
     vectorOfItems.push_back(*itemF);
-    itemG = new Armor("Barbute", 1, 11,0,10);
+    itemG = new Armor("Blue Dragon Scale Armor", 1, 11,0,10);
     vectorOfItems.push_back(*itemG);
-    itemH = new Armor("Gauntlet", 1, 11,0,10);
+    itemH = new Armor("Chain Mail Armour", 1, 11,0,10);
     vectorOfItems.push_back(*itemH);
-    itemI = new Armor("Plackart", 1, 11,0,10);
+    itemI = new Armor("Gold Dragona Armour", 1, 11,0,10);
     vectorOfItems.push_back(*itemI);
 
     random_shuffle(vectorOfItems.begin(),vectorOfItems.end());
+}
+vector<Item> ZorkUL::getItemsInRoom(){
+    return currentRoom->getItemsInRoom();
+}
+
+string ZorkUL::displayItem(){
+    return currentRoom->displayItem();
 }
