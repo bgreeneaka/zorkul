@@ -1,6 +1,9 @@
 #include <QtWidgets>
 #include "GUI.h"
 #include <sstream>
+//temp key handler
+//#include <QApplication>
+//temp key handler
 using namespace std;
 
 GUI::GUI(QWidget *parent) :
@@ -9,20 +12,24 @@ GUI::GUI(QWidget *parent) :
     // bottom display
     bottomDisplay = new QLineEdit("");
 
+    //temp key handler
+//QApplication::instance()->installEventFilter(this);
+
+//temp key handler
+
     bottomDisplay->setAlignment(Qt::AlignLeft);
     bottomDisplay->setMaxLength(35);
+
     QFont font = bottomDisplay->font();
     connect(bottomDisplay, SIGNAL(returnPressed()), this, SLOT(cmdLineEnterPressed()));
     font.setPointSize(font.pointSize() + 8);
     bottomDisplay->setFont(font);
-    bottomDisplay->setFocus();
 
-    // signals listeneres for keys -- start
-    //connect(bottomDisplay, SIGNAL(Key_UpPressed()), this, SLOT(northButtonClicked()));
+    // this has to be done to make arrow keys work ---start
+    //bottomDisplay->setFocus();
+    topLevelWidget()->setFocus();
+    // this has to be done to make arrow keys work ---end
 
-    // signals listeneres for keys --- end
-
-    //top right display
     toprightpane = new QTextEdit("");
 
     //get current room details
@@ -149,10 +156,14 @@ void GUI::updateGUI(){
     drawFloor();
     drawWall();
     drawDoor();
-
-    bottomDisplay->setFocus();
+    // this has to be done to make arrow keys work ---start
+    //bottomDisplay->setFocus();
+    topLevelWidget()->setFocus();
+    // this has to be done to make arrow keys work ---end
 }
-
+void GUI::keepCmdLineFocuse(){
+bottomDisplay->setFocus();
+}
 void GUI::cmdLineEnterPressed(){
     QString QuserInput = bottomDisplay->text();
     string userinput = QuserInput.toLocal8Bit().constData();
@@ -183,7 +194,9 @@ void GUI::cmdLineEnterPressed(){
     QString zorkULQstrR = tempStr.c_str();
     toprightpane->setText(zorkULQstrR);
     updateGUI();
+keepCmdLineFocuse();
     delete cmd;
+
 }
 
 void GUI::drawFloor() {
@@ -354,15 +367,20 @@ void GUI::drawItem(){
 void GUI::keyPressEvent(QKeyEvent *event)
 {
 
+
+
+
+
 switch(event->key()){
+
 case Qt::Key_Up:
 northButtonClicked();
 break;
-case Qt::Key_Direction_L:
-northButtonClicked();
+case Qt::Key_Left:
+westButtonClicked();
 break;
 case Qt::Key_Right:
-northButtonClicked();
+eastButtonClicked();
 break;
 case Qt::Key_Down:
 southButtonClicked();
@@ -379,5 +397,10 @@ break;
 case Qt::Key_F4:
 lookButtonClicked();
 break;
+
 }
 }
+
+
+
+

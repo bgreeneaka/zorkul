@@ -40,6 +40,7 @@ private slots:
     void qbutclicked(string firstWord, string secondWord);
     void getCurrentRoomDescription();
     void updateGUI();
+  void  keepCmdLineFocuse();
     void cmdLineEnterPressed();
     void drawFloor();
     void drawWall();
@@ -87,6 +88,11 @@ private:
     QGridLayout *mainLayout;
     QGridLayout *controlsLayout;
     QGridLayout *roomLayout;
+
+signals:
+
+    void moveLeft();
+    void moveRight();
 };
 
 #endif // GUI_H
