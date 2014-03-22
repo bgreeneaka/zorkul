@@ -62,6 +62,7 @@ GUI::GUI(QWidget *parent) :
 
     roomLayout->setHorizontalSpacing(0);
     roomLayout->setVerticalSpacing(0);
+    roomLayout->setContentsMargins(0, 0, 0, 0);
 
     drawFloor();
     drawWall();
@@ -177,6 +178,7 @@ void GUI::drawFloor() {
             floorLabel->setIcon(QIcon("://resources/images/rooms/pedestal_full.png"));
             floorLabel->setFlat(true);
             floorLabel->setIconSize(QSize(32, 32));
+            floorLabel->setStyleSheet("border: none; padding: 0 0 0 0;");
             roomLayout->addWidget(floorLabel, i, j);
         }
     }
