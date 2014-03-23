@@ -5,8 +5,8 @@
 #include <iostream>
 using std::vector;
 
-Weapon::Weapon(string inDescription, int inWeightGrams, float inValue, int weaponCheck, int damageValue)
-    : Item(inDescription, inWeightGrams, inValue)
+Weapon::Weapon(string inDescription, int inWeightGrams, float inValue, int damageValue, string inTile)
+    : Item(inDescription, inWeightGrams, inValue, inTile)
 {
     weaponDescription = inDescription;
     weaponValue = inValue;

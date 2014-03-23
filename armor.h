@@ -13,7 +13,7 @@ private:
     int armorTile;
 
 public:
-    Armor(string inDescription, int inWeightGrams, float inValue, int inWeaponCheck, int inArmorStrenght);
+    Armor(string inDescription, int inWeightGrams, float inValue, int inWeaponCheck, int inArmorStrenght, string inTile);
     void setArmorStrength(int inArmorStrength);
     int getArmorStrength();
     int getArmorTile();

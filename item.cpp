@@ -1,6 +1,7 @@
 #include "item.h"
 
-Item::Item (string inDescription, int inWeightGrams, float inValue/* int isweaponCheck*/) {
+Item::Item (string inDescription, int inWeightGrams, float inValue, string inTile) {
+    tile = inTile;
 	description = inDescription;
 	setWeight(inWeightGrams);
 	value = inValue;
@@ -46,3 +47,6 @@ string Item::getLongDescription()
 
 }
 
+string Item::getTile() {
+    return tile;
+}

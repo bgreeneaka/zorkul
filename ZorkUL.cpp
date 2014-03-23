@@ -187,23 +187,23 @@ string ZorkUL::getRoomDescription(){
 void ZorkUL :: createItems(){
     Item  *itemA, *itemB, *itemC, *itemD, *itemE, *itemF, *itemG, *itemH,*itemI;
 
-    itemA = new Weapon("Sword", 1, 11,0,10);
+    itemA = new Weapon("Sword", 1, 11,0,"://resources/images/items/weapons/bastard_sword.png");
     vectorOfItems.push_back(*itemA);
-    itemB = new Weapon("Axe", 1, 11,0,10);
+    itemB = new Weapon("Axe", 1, 11,0,"://resources/images/items/weapons/battle_axe2.png");
     vectorOfItems.push_back(*itemB);
-    itemC = new Weapon("Hammer", 1, 11,0,10);
+    itemC = new Weapon("Hammer", 1, 11,0,"://resources/images/items/weapons/morningstar1.png");
     vectorOfItems.push_back(*itemC);
-    itemD = new Potion("Invisibility Potion", 1, 11,0,10,"Invisibility");
+    itemD = new Potion("Invisibility Potion", 1, 11,0,10,"Invisibility", "://resources/images/items/potions/emerald.png");
     vectorOfItems.push_back(*itemD);
-    itemE = new Potion("Elixir of Life", 1, 11,0,10,"Health Increase");
+    itemE = new Potion("Elixir of Life", 1, 11,0,10,"Health Increase", "://resources/images/items/potions/emerald.png");
     vectorOfItems.push_back(*itemE);
-    itemF = new Potion("Death-Cap Draught", 1, 11,0,10,"Posion");
+    itemF = new Potion("Death-Cap Draught", 1, 11,0,10,"Posion", "://resources/images/items/potions/orange.png");
     vectorOfItems.push_back(*itemF);
-    itemG = new Armor("Blue Dragon Scale Armor", 1, 11,0,10);
+    itemG = new Armor("Blue Dragon Scale Armor", 1, 11,0,10, "://resources/images/items/armour/blue_dragon_scale_mail.png");
     vectorOfItems.push_back(*itemG);
-    itemH = new Armor("Chain Mail Armour", 1, 11,0,10);
+    itemH = new Armor("Chain Mail Armour", 1, 11,0,10, "://resources/images/items/armour/chain_mail2.png");
     vectorOfItems.push_back(*itemH);
-    itemI = new Armor("Gold Dragona Armour", 1, 11,0,10);
+    itemI = new Armor("Gold Dragona Armour", 1, 11,0,10, "://resources/images/items/armour/gold_dragon_armour.png");
     vectorOfItems.push_back(*itemI);
 
     random_shuffle(vectorOfItems.begin(),vectorOfItems.end());

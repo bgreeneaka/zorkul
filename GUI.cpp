@@ -419,7 +419,8 @@ void GUI::drawInventory() {
     int j = 0;
     for (unsigned int i = 0; i < items.size(); i++) {
             QPushButton *inventoryButton = new QPushButton();
-            //inventoryButton->setIcon(QIcon(items[i].g);
+            string tile = items[i].getTile();
+            inventoryButton->setIcon(QIcon(tile.c_str()));
             inventoryButton->setFlat(true);
             inventoryButton->setIconSize(QSize(32, 32));
             inventoryButton->setStyleSheet("border: none; padding: 0 0 0 0;");

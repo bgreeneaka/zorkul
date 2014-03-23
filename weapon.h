@@ -23,7 +23,7 @@ private:
     vector <Item> weaponsList;
 
 public:
-    Weapon(string description, int inWeight, float inValue, int weaponCheck,int damageValue);
+    Weapon(string description, int inWeight, float inValue,int damageValue, string inTile);
     void setDamage(int damageValue);
     int getDamage();
     int getWeaponTile();

@@ -21,7 +21,7 @@ private:
     int potionTile;
 
 public:
-    Potion(string inDescription, int inWeightGrams, float inValue, int inWeaponCheck, int inPotionStrenght, string inPotionEffect);
+    Potion(string inDescription, int inWeightGrams, float inValue, int inWeaponCheck, int inPotionStrenght, string inPotionEffect, string inTile);
     void setPotionStrength(int inPotionStrength);
     int getPotionStrength();
     int getPotionTile();

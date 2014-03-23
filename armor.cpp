@@ -1,7 +1,7 @@
 #include "armor.h"
 
-Armor::Armor(string inDescription, int inWeightGrams, float inValue, int inWeaponCheck, int inArmorStrenght)
-    : Item(inDescription, inWeightGrams, inValue)
+Armor::Armor(string inDescription, int inWeightGrams, float inValue, int inWeaponCheck, int inArmorStrenght, string inTile)
+    : Item(inDescription, inWeightGrams, inValue, inTile)
 {
     armorDescription = inDescription;
     armorWeightGrams = inWeightGrams;

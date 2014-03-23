@@ -13,9 +13,10 @@ private:
 	int weightGrams;
 	float value;
 	bool weaponCheck;
+    string tile;
 
 public:
-    Item (string inDescription, int inWeightGrams, float inValue);
+    Item (string inDescription, int inWeightGrams, float inValue, string inTile);
     Item (string description);
 	string getShortDescription();
     string getLongDescription();
@@ -25,6 +26,7 @@ public:
 	void setValue(float value);
 	int getWeaponCheck();
 	void setWeaponCheck(int weaponCheck);
+    string getTile();
 };
 
 #endif /*ITEM_H_*/

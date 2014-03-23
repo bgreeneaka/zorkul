@@ -1,7 +1,7 @@
 #include "potion.h"
 
-Potion::Potion(string inDescription, int inWeightGrams, float inValue, int inWeaponCheck, int inPotionStrenght, string inPotionEffect)
-    : Item(inDescription, inWeightGrams, inValue)
+Potion::Potion(string inDescription, int inWeightGrams, float inValue, int inWeaponCheck, int inPotionStrenght, string inPotionEffect, string inTile)
+    : Item(inDescription, inWeightGrams, inValue, inTile)
 {
     potionDescription = inDescription;
     potionWeightGrams = inWeightGrams;
