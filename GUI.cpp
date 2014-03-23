@@ -154,6 +154,10 @@ void GUI::showInventoryPane() {
     stackedPanes->setCurrentIndex(1);
 }
 
+void GUI::inventoryButtonClick(int index) {
+    qbutclicked("put", zorkul.getItemsInCharacter().at(index).getShortDescription());
+}
+
 void GUI::qbutclicked(string firstWord, string secondWord){
     Command *cmd = new Command(firstWord, secondWord);
     string tempStr = zorkul.processCommand(*cmd);
@@ -196,6 +200,7 @@ void GUI::cmdLineEnterPressed(){
     std::istringstream ss(userinput);
     string token;
     bottomDisplay->setText("");
+
     while(std::getline(ss, token, ' ')) {
         cmds.push_back(token);
     }
@@ -256,17 +261,15 @@ void GUI::drawWall() {
         QPushButton *wallLabel = dynamic_cast<QPushButton*>(roomLayout->itemAtPosition(i, j)->widget());
         wallLabel->setIcon(QIcon("://resources/images/rooms/brick_brown0.png"));
     }
+    for (unsigned int i = 0; i < 10; i++) {
+        QPushButton *wallLabel = dynamic_cast<QPushButton*>(roomLayout->itemAtPosition(j, i)->widget());
+        wallLabel->setIcon(QIcon("://resources/images/rooms/brick_brown0.png"));
+    }
     j = 9;
     for (unsigned int i = 0; i < 10; i++) {
         QPushButton *wallLabel = dynamic_cast<QPushButton*>(roomLayout->itemAtPosition(i, j)->widget());
         wallLabel->setIcon(QIcon("://resources/images/rooms/brick_brown0.png"));
     }
-    j = 9;
-    for (unsigned int i = 0; i < 10; i++) {
-        QPushButton *wallLabel = dynamic_cast<QPushButton*>(roomLayout->itemAtPosition(j, i)->widget());
-        wallLabel->setIcon(QIcon("://resources/images/rooms/brick_brown0.png"));
-    }
-    j = 0;
     for (unsigned int i = 0; i < 10; i++) {
         QPushButton *wallLabel = dynamic_cast<QPushButton*>(roomLayout->itemAtPosition(j, i)->widget());
         wallLabel->setIcon(QIcon("://resources/images/rooms/brick_brown0.png"));
@@ -305,15 +308,11 @@ void GUI::drawItem(){
 
     if(zorkul.displayItem().compare("no items in room")==0){
         QPushButton *Item_botton = dynamic_cast<QPushButton*>(roomLayout->itemAtPosition(5, 5)->widget());
-        Item_botton->setFlat(true);
-        Item_botton->setIconSize(QSize(32, 32));
         Item_botton->setIcon(QIcon("://resources/images/rooms/pedestal_full.png"));
     }
 
     for (unsigned int i = 0; i < items.size(); i++) {
         QPushButton *Item_botton = dynamic_cast<QPushButton*>(roomLayout->itemAtPosition(5, 5)->widget());
-        Item_botton->setFlat(true);
-        Item_botton->setIconSize(QSize(32, 32));
         Item_botton->setIcon(QIcon(items[i].getTile().c_str()));
     }
 }
@@ -358,4 +357,16 @@ void GUI::drawInventory() {
         inventoryButton->setStyleSheet("border: none; padding: 0 0 0 0;");
         inventoryLayout->addWidget(inventoryButton, i, j);
     }
+}
+
+void GUI::setupInventory() {
+//    int j = 0;
+//    for (unsigned int i = 0; i < 9; i++) {
+//        QPushButton *inventoryButton = new QPushButton();
+//        inventoryButton->setFlat(true);
+//        inventoryButton->setIconSize(QSize(32, 32));
+//        inventoryButton->setStyleSheet("border: none; padding: 0 0 0 0;");
+//        inventoryLayout->addWidget(inventoryButton, i, j);
+//        connect(inventoryButton, SIGNAL(released()), this, SLOT(inventoryButtonClicked(i)));
+//    }
 }

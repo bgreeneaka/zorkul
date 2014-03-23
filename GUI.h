@@ -53,6 +53,8 @@ private slots:
     void keyPressEvent(QKeyEvent *event);
     void showInventoryPane();
     void drawInventory();
+    void inventoryButtonClick(int index);
+    void setupInventory();
 private:
 
     ZorkUL zorkul;
