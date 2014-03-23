@@ -70,10 +70,21 @@ GUI::GUI(QWidget *parent) :
     mainLayout = new QGridLayout();
     controlsLayout = new QGridLayout();
     roomLayout = new QGridLayout();
+    inventoryLayout = new QGridLayout();
+
+    inventory = new QWidget();
+    inventory->setLayout(inventoryLayout);
+    stackedPanes = new QStackedWidget();
+    stackedPanes->addWidget(toprightpane);
+    stackedPanes->addWidget(inventory);
 
     roomLayout->setHorizontalSpacing(0);
     roomLayout->setVerticalSpacing(0);
     roomLayout->setContentsMargins(0, 0, 0, 0);
+
+    inventoryLayout->setHorizontalSpacing(0);
+    inventoryLayout->setVerticalSpacing(0);
+    inventoryLayout->setContentsMargins(0, 0, 0, 0);
 
     drawFloor();
     drawWall();
@@ -81,13 +92,14 @@ GUI::GUI(QWidget *parent) :
     drawItem();
     setupDoors();
     itemClick();
+    drawInventory();
 
     QPushButton *characterButton = dynamic_cast<QPushButton*>(roomLayout->itemAtPosition(4, 4)->widget());
-    connect(characterButton, SIGNAL(released()), this, SLOT(invButtonClicked()));
+    connect(characterButton, SIGNAL(released()), this, SLOT(showInventoryPane()));
 
     mainLayout->setSizeConstraint(QLayout::SetFixedSize);
 
-    controlsLayout->addWidget(toprightpane, 1, 0,4,4);
+    controlsLayout->addWidget(stackedPanes, 1, 0,4,4);
     controlsLayout->addWidget(info_button, 0,0);
     controlsLayout->addWidget(map_button, 0,1);
     controlsLayout->addWidget(inv_button, 0,2);
@@ -137,12 +149,17 @@ void GUI :: itemButtonClicked(){
     qbutclicked("take",items[0].getShortDescription());
 }
 
+void GUI::showInventoryPane() {
+    stackedPanes->setCurrentIndex(1);
+}
+
 void GUI::qbutclicked(string firstWord, string secondWord){
     Command *cmd = new Command(firstWord, secondWord);
     string tempStr = zorkul.processCommand(*cmd);
     QString zorkULQstrR = tempStr.c_str();
     toprightpane->setText(zorkULQstrR);
     updateGUI();
+    stackedPanes->setCurrentIndex(0);
     delete cmd;
 }
 
@@ -158,6 +175,7 @@ void GUI::updateGUI(){
     drawFloor();
     drawWall();
     drawDoor();
+    drawInventory();
     // this has to be done to make arrow keys work ---start
     //bottomDisplay->setFocus();
     topLevelWidget()->setFocus();
@@ -393,5 +411,18 @@ void GUI::keyPressEvent(QKeyEvent *event) {
         case Qt::Key_F4:
             lookButtonClicked();
             break;
+    }
+}
+
+void GUI::drawInventory() {
+    vector<Item> items = zorkul.getItemsInCharacter();
+    int j = 0;
+    for (unsigned int i = 0; i < items.size(); i++) {
+            QPushButton *inventoryButton = new QPushButton();
+            //inventoryButton->setIcon(QIcon(items[i].g);
+            inventoryButton->setFlat(true);
+            inventoryButton->setIconSize(QSize(32, 32));
+            inventoryButton->setStyleSheet("border: none; padding: 0 0 0 0;");
+            inventoryLayout->addWidget(inventoryButton, i, j);
     }
 }

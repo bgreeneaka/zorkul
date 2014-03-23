@@ -215,3 +215,7 @@ vector<Item> ZorkUL::getItemsInRoom(){
 string ZorkUL::displayItem(){
     return currentRoom->displayItem();
 }
+
+vector<Item> ZorkUL::getItemsInCharacter() {
+    return player->getItems();
+}

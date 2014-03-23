@@ -16,6 +16,8 @@ class QLabel;
 class QPixmap;
 class QPushButton;
 class QGridLayout;
+class QStackedWidget;
+class QWidget;
 QT_END_NAMESPACE
 
 
@@ -49,7 +51,8 @@ private slots:
     void drawItem();
     void itemClick();
     void keyPressEvent(QKeyEvent *event);
-
+    void showInventoryPane();
+    void drawInventory();
 private:
 
     ZorkUL zorkul;
@@ -88,6 +91,11 @@ private:
     QGridLayout *mainLayout;
     QGridLayout *controlsLayout;
     QGridLayout *roomLayout;
+    QGridLayout *inventoryLayout;
+
+    QWidget *inventory;
+
+    QStackedWidget *stackedPanes;
 
 signals:
 

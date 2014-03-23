@@ -44,3 +44,7 @@ string Character::longDescription() {
     return items;
 }
 
+vector<Item> Character::getItems() {
+    return itemsInCharacter;
+}
+

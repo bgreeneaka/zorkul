@@ -22,6 +22,7 @@ public:
     string longDescription();
     int isItemInCharacter(string description);
     Item* getItem(int location);
+    vector<Item> getItems();
 };
 
 #endif

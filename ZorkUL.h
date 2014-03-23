@@ -37,6 +37,7 @@ public:
     string getRoomDescription();
     vector<Item> getItemsInRoom();
     string displayItem();
+    vector<Item> getItemsInCharacter();
 };
 
 #endif
