@@ -42,7 +42,7 @@ private slots:
     void qbutclicked(string firstWord, string secondWord);
     void getCurrentRoomDescription();
     void updateGUI();
-  void  keepCmdLineFocuse();
+    void  keepCmdLineFocus();
     void cmdLineEnterPressed();
     void drawFloor();
     void drawWall();

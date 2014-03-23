@@ -64,7 +64,7 @@ GUI::GUI(QWidget *parent) :
     // Connect button signal to appropriate slot
     connect(info_button, SIGNAL(released()), this, SLOT(infoButtonClicked()));
     connect(map_button, SIGNAL(released()), this, SLOT(mapButtonClicked()));
-    connect(inv_button, SIGNAL(released()), this, SLOT(invButtonClicked()));
+    connect(inv_button, SIGNAL(released()), this, SLOT(showInventoryPane()));
     connect(look_button, SIGNAL(released()), this, SLOT(lookButtonClicked()));
 
     mainLayout = new QGridLayout();
@@ -152,6 +152,7 @@ void GUI :: itemButtonClicked(){
 
 void GUI::showInventoryPane() {
     stackedPanes->setCurrentIndex(1);
+     topLevelWidget()->setFocus();
 }
 
 void GUI::inventoryButtonClick(int index) {
@@ -187,7 +188,7 @@ void GUI::updateGUI(){
     // this has to be done to make arrow keys work ---end
 }
 
-void GUI::keepCmdLineFocuse(){
+void GUI::keepCmdLineFocus(){
     bottomDisplay->setFocus();
 }
 
@@ -222,7 +223,7 @@ void GUI::cmdLineEnterPressed(){
     QString zorkULQstrR = tempStr.c_str();
     toprightpane->setText(zorkULQstrR);
     updateGUI();
-    keepCmdLineFocuse();
+    keepCmdLineFocus();
     delete cmd;
 }
 
