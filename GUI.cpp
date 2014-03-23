@@ -93,6 +93,7 @@ GUI::GUI(QWidget *parent) :
     drawItem();
     setupDoors();
     itemClick();
+    setupInventory();
     drawInventory();
 
     QPushButton *characterButton = dynamic_cast<QPushButton*>(roomLayout->itemAtPosition(4, 4)->widget());
@@ -152,11 +153,11 @@ void GUI :: itemButtonClicked(){
 
 void GUI::showInventoryPane() {
     stackedPanes->setCurrentIndex(1);
-     topLevelWidget()->setFocus();
+    topLevelWidget()->setFocus();
 }
 
 void GUI::inventoryButtonClick(int index) {
-    qbutclicked("put", zorkul.getItemsInCharacter().at(index).getShortDescription());
+    qbutclicked("put", zorkul.getItemsInCharacter().at(index).getShortDescription().c_str());
 }
 
 void GUI::qbutclicked(string firstWord, string secondWord){
@@ -350,24 +351,29 @@ void GUI::keyPressEvent(QKeyEvent *event) {
 void GUI::drawInventory() {
     vector<Item> items = zorkul.getItemsInCharacter();
     int j = 0;
-    for (unsigned int i = 0; i < items.size(); i++) {
+    for (unsigned int i = 0; i < 9; i++) {
+        QPushButton *inventoryButton = dynamic_cast<QPushButton*>(inventoryLayout->itemAtPosition(i, j)->widget());
+        if (i < items.size()) {
+            inventoryButton->setIcon(QIcon(items[i].getTile().c_str()));
+        } else {
+            inventoryButton->setIcon(QIcon());
+        }
+    }
+}
+
+void GUI::setupInventory() {
+    QSignalMapper *signalMapper = new QSignalMapper(this);
+    int j = 0;
+    for (unsigned int i = 0; i < 9; i++) {
         QPushButton *inventoryButton = new QPushButton();
-        inventoryButton->setIcon(QIcon(items[i].getTile().c_str()));
+
+        connect(inventoryButton, SIGNAL(released()), signalMapper, SLOT(map()));
+        signalMapper->setMapping(inventoryButton, i);
+
         inventoryButton->setFlat(true);
         inventoryButton->setIconSize(QSize(32, 32));
         inventoryButton->setStyleSheet("border: none; padding: 0 0 0 0;");
         inventoryLayout->addWidget(inventoryButton, i, j);
     }
-}
-
-void GUI::setupInventory() {
-//    int j = 0;
-//    for (unsigned int i = 0; i < 9; i++) {
-//        QPushButton *inventoryButton = new QPushButton();
-//        inventoryButton->setFlat(true);
-//        inventoryButton->setIconSize(QSize(32, 32));
-//        inventoryButton->setStyleSheet("border: none; padding: 0 0 0 0;");
-//        inventoryLayout->addWidget(inventoryButton, i, j);
-//        connect(inventoryButton, SIGNAL(released()), this, SLOT(inventoryButtonClicked(i)));
-//    }
+    connect(signalMapper, SIGNAL(mapped(int)), this, SLOT(inventoryButtonClick(int)));
 }
