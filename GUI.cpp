@@ -50,7 +50,6 @@ GUI::GUI(QWidget *parent) :
     inv_button = new QPushButton("Inventory(F3)", this);
     look_button = new QPushButton("Look(F4)", this);
 
-
     //new butttons - map, info character etc
     info_button->setGeometry(QRect(QPoint(100, 100),
                                    QSize(200, 50)));
@@ -99,13 +98,14 @@ GUI::GUI(QWidget *parent) :
     QPushButton *characterButton = dynamic_cast<QPushButton*>(roomLayout->itemAtPosition(4, 4)->widget());
     connect(characterButton, SIGNAL(released()), this, SLOT(showInventoryPane()));
 
-    mainLayout->setSizeConstraint(QLayout::SetFixedSize);
-
     controlsLayout->addWidget(stackedPanes, 1, 0,4,4);
     controlsLayout->addWidget(info_button, 0,0);
     controlsLayout->addWidget(map_button, 0,1);
     controlsLayout->addWidget(inv_button, 0,2);
     controlsLayout->addWidget(look_button, 0,3);
+
+    mainLayout->setSizeConstraint(QLayout::SetFixedSize);
+
     mainLayout->addItem(controlsLayout,0,3,2,3);
     mainLayout->addItem(roomLayout,1 ,1);
     mainLayout->addWidget(bottomDisplay, 3, 0, 1, 6);
@@ -146,9 +146,43 @@ void GUI::lookButtonClicked(){
     qbutclicked("look", "");
 }
 
+void GUI::keyPressEvent(QKeyEvent *event) {
+    switch(event->key()){
+    case Qt::Key_Up:
+        northButtonClicked();
+        break;
+    case Qt::Key_Left:
+        westButtonClicked();
+        break;
+    case Qt::Key_Right:
+        eastButtonClicked();
+        break;
+    case Qt::Key_Down:
+        southButtonClicked();
+        break;
+    case Qt::Key_F1:
+        infoButtonClicked();
+        break;
+    case Qt::Key_F2:
+        mapButtonClicked();
+        break;
+    case Qt::Key_F3:
+        invButtonClicked();
+        break;
+    case Qt::Key_F4:
+        lookButtonClicked();
+        break;
+    }
+}
+
 void GUI :: itemButtonClicked(){
     vector<Item> items = zorkul.getItemsInRoom();
     qbutclicked("take",items[0].getShortDescription());
+}
+
+void GUI:: itemClick(){
+    QPushButton *Item_botton = dynamic_cast<QPushButton*>(roomLayout->itemAtPosition(5, 5)->widget());
+    connect(Item_botton, SIGNAL(released()), this, SLOT(itemButtonClicked()));
 }
 
 void GUI::showInventoryPane() {
@@ -243,20 +277,6 @@ void GUI::drawFloor() {
     floorLabel->setIcon(QIcon("://resources/images/rooms/elf_m.png"));
 }
 
-void GUI::setupDoors() {
-    QPushButton *eastButton = dynamic_cast<QPushButton*>(roomLayout->itemAtPosition(4, 9)->widget());
-    connect(eastButton, SIGNAL(released()), this, SLOT(eastButtonClicked()));
-
-    QPushButton *westButton = dynamic_cast<QPushButton*>(roomLayout->itemAtPosition(4, 0)->widget());
-    connect(westButton, SIGNAL(released()), this, SLOT(westButtonClicked()));
-
-    QPushButton *northButton = dynamic_cast<QPushButton*>(roomLayout->itemAtPosition(0, 5)->widget());
-    connect(northButton, SIGNAL(released()), this, SLOT(northButtonClicked()));
-
-    QPushButton *southButton = dynamic_cast<QPushButton*>(roomLayout->itemAtPosition(9, 5)->widget());
-    connect(southButton, SIGNAL(released()), this, SLOT(southButtonClicked()));
-}
-
 void GUI::drawWall() {
     int j = 0;
     for (unsigned int i = 0; i < 10; i++) {
@@ -300,9 +320,18 @@ void GUI::drawDoor() {
     }
 }
 
-void GUI:: itemClick(){
-    QPushButton *Item_botton = dynamic_cast<QPushButton*>(roomLayout->itemAtPosition(5, 5)->widget());
-    connect(Item_botton, SIGNAL(released()), this, SLOT(itemButtonClicked()));
+void GUI::setupDoors() {
+    QPushButton *eastButton = dynamic_cast<QPushButton*>(roomLayout->itemAtPosition(4, 9)->widget());
+    connect(eastButton, SIGNAL(released()), this, SLOT(eastButtonClicked()));
+
+    QPushButton *westButton = dynamic_cast<QPushButton*>(roomLayout->itemAtPosition(4, 0)->widget());
+    connect(westButton, SIGNAL(released()), this, SLOT(westButtonClicked()));
+
+    QPushButton *northButton = dynamic_cast<QPushButton*>(roomLayout->itemAtPosition(0, 5)->widget());
+    connect(northButton, SIGNAL(released()), this, SLOT(northButtonClicked()));
+
+    QPushButton *southButton = dynamic_cast<QPushButton*>(roomLayout->itemAtPosition(9, 5)->widget());
+    connect(southButton, SIGNAL(released()), this, SLOT(southButtonClicked()));
 }
 
 void GUI::drawItem(){
@@ -316,35 +345,6 @@ void GUI::drawItem(){
     for (unsigned int i = 0; i < items.size(); i++) {
         QPushButton *Item_botton = dynamic_cast<QPushButton*>(roomLayout->itemAtPosition(5, 5)->widget());
         Item_botton->setIcon(QIcon(items[i].getTile().c_str()));
-    }
-}
-
-void GUI::keyPressEvent(QKeyEvent *event) {
-    switch(event->key()){
-    case Qt::Key_Up:
-        northButtonClicked();
-        break;
-    case Qt::Key_Left:
-        westButtonClicked();
-        break;
-    case Qt::Key_Right:
-        eastButtonClicked();
-        break;
-    case Qt::Key_Down:
-        southButtonClicked();
-        break;
-    case Qt::Key_F1:
-        infoButtonClicked();
-        break;
-    case Qt::Key_F2:
-        mapButtonClicked();
-        break;
-    case Qt::Key_F3:
-        invButtonClicked();
-        break;
-    case Qt::Key_F4:
-        lookButtonClicked();
-        break;
     }
 }
 
