@@ -13,9 +13,8 @@ GUI::GUI(QWidget *parent) :
     bottomDisplay = new QLineEdit("");
 
     //temp key handler
-//QApplication::instance()->installEventFilter(this);
-
-//temp key handler
+    //QApplication::instance()->installEventFilter(this);
+    //temp key handler
 
     bottomDisplay->setAlignment(Qt::AlignLeft);
     bottomDisplay->setMaxLength(35);
@@ -116,16 +115,16 @@ void GUI::westButtonClicked(){
 
 void GUI::infoButtonClicked(){
     qbutclicked("info", "");
-
 }
+
 void GUI::mapButtonClicked(){    
     qbutclicked("map", "");
-
 }
+
 void GUI::invButtonClicked(){
     qbutclicked("inventory", "");
-
 }
+
 void GUI::lookButtonClicked(){
     qbutclicked("look", "");
 }
@@ -161,9 +160,11 @@ void GUI::updateGUI(){
     topLevelWidget()->setFocus();
     // this has to be done to make arrow keys work ---end
 }
+
 void GUI::keepCmdLineFocuse(){
-bottomDisplay->setFocus();
+    bottomDisplay->setFocus();
 }
+
 void GUI::cmdLineEnterPressed(){
     QString QuserInput = bottomDisplay->text();
     string userinput = QuserInput.toLocal8Bit().constData();
@@ -194,9 +195,8 @@ void GUI::cmdLineEnterPressed(){
     QString zorkULQstrR = tempStr.c_str();
     toprightpane->setText(zorkULQstrR);
     updateGUI();
-keepCmdLineFocuse();
+    keepCmdLineFocuse();
     delete cmd;
-
 }
 
 void GUI::drawFloor() {
@@ -359,48 +359,34 @@ void GUI::drawItem(){
             Item_botton->setIcon(QIcon("://resources/images/items/potions/emerald.png"));
         }
     }
-
-
 }
 
+void GUI::keyPressEvent(QKeyEvent *event) {
 
-void GUI::keyPressEvent(QKeyEvent *event)
-{
-
-
-
-
-
-switch(event->key()){
-
-case Qt::Key_Up:
-northButtonClicked();
-break;
-case Qt::Key_Left:
-westButtonClicked();
-break;
-case Qt::Key_Right:
-eastButtonClicked();
-break;
-case Qt::Key_Down:
-southButtonClicked();
-break;
-case Qt::Key_F1:
-infoButtonClicked();
-break;
-case Qt::Key_F2:
-mapButtonClicked();
-break;
-case Qt::Key_F3:
-invButtonClicked();
-break;
-case Qt::Key_F4:
-lookButtonClicked();
-break;
-
+    switch(event->key()){
+        case Qt::Key_Up:
+            northButtonClicked();
+            break;
+        case Qt::Key_Left:
+            westButtonClicked();
+            break;
+        case Qt::Key_Right:
+            eastButtonClicked();
+            break;
+        case Qt::Key_Down:
+            southButtonClicked();
+            break;
+        case Qt::Key_F1:
+            infoButtonClicked();
+            break;
+        case Qt::Key_F2:
+            mapButtonClicked();
+            break;
+        case Qt::Key_F3:
+            invButtonClicked();
+            break;
+        case Qt::Key_F4:
+            lookButtonClicked();
+            break;
+    }
 }
-}
-
-
-
-
