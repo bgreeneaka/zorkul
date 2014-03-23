@@ -231,8 +231,8 @@ void GUI::drawFloor() {
             roomLayout->addWidget(floorLabel, i, j);
         }
     }
-     QPushButton *floorLabel = dynamic_cast<QPushButton*>(roomLayout->itemAtPosition(4, 4)->widget());
-     floorLabel->setIcon(QIcon("://resources/images/rooms/elf_m.png"));
+    QPushButton *floorLabel = dynamic_cast<QPushButton*>(roomLayout->itemAtPosition(4, 4)->widget());
+    floorLabel->setIcon(QIcon("://resources/images/rooms/elf_m.png"));
 }
 
 void GUI::setupDoors() {
@@ -326,91 +326,40 @@ void GUI::drawItem(){
     }
 
     for (unsigned int i = 0; i < items.size(); i++) {
-        if (items[i].getShortDescription().compare("Sword") == 0) {
-            QPushButton *Item_botton = dynamic_cast<QPushButton*>(roomLayout->itemAtPosition(5, 5)->widget());
-            Item_botton->setFlat(true);
-            Item_botton->setIconSize(QSize(32, 32));
-            Item_botton->setIcon(QIcon("://resources/images/items/weapons/bastard_sword.png"));
-            //items.erase(items.begin());
-        }
-        else if (items[i].getShortDescription().compare("Axe") == 0) {
-            QPushButton *Item_botton = dynamic_cast<QPushButton*>(roomLayout->itemAtPosition(5, 5)->widget());
-            Item_botton->setFlat(true);
-            Item_botton->setIconSize(QSize(32, 32));
-            Item_botton->setIcon(QIcon("://resources/images/items/weapons/battle_axe2.png"));
-        }
-        else if (items[i].getShortDescription().compare("Hammer") == 0) {
-            QPushButton *Item_botton = dynamic_cast<QPushButton*>(roomLayout->itemAtPosition(5, 5)->widget());
-            Item_botton->setFlat(true);
-            Item_botton->setIconSize(QSize(32, 32));
-            Item_botton->setIcon(QIcon("://resources/images/items/weapons/morningstar1.png"));
-        }
-        else if (items[i].getShortDescription().compare("Gold Dragona Armour") == 0) {
-            QPushButton *Item_botton = dynamic_cast<QPushButton*>(roomLayout->itemAtPosition(5, 5)->widget());
-            Item_botton->setFlat(true);
-            Item_botton->setIconSize(QSize(32, 32));
-            Item_botton->setIcon(QIcon("://resources/images/items/armour/gold_dragon_armour.png"));
-        }
-        else if (items[i].getShortDescription().compare("Chain Mail Armour") == 0) {
-            QPushButton *Item_botton = dynamic_cast<QPushButton*>(roomLayout->itemAtPosition(5, 5)->widget());
-            Item_botton->setFlat(true);
-            Item_botton->setIconSize(QSize(32, 32));
-            Item_botton->setIcon(QIcon("://resources/images/items/armour/chain_mail2.png"));
-        }
-        else if (items[i].getShortDescription().compare("Blue Dragon Scale Armor") == 0) {
-            QPushButton *Item_botton = dynamic_cast<QPushButton*>(roomLayout->itemAtPosition(5, 5)->widget());
-            Item_botton->setFlat(true);
-            Item_botton->setIconSize(QSize(32, 32));
-            Item_botton->setIcon(QIcon("://resources/images/items/armour/blue_dragon_scale_mail.png"));
-        }
-        else if (items[i].getShortDescription().compare("Death-Cap Draught") == 0) {
-            QPushButton *Item_botton = dynamic_cast<QPushButton*>(roomLayout->itemAtPosition(5, 5)->widget());
-            Item_botton->setFlat(true);
-            Item_botton->setIconSize(QSize(32, 32));
-            Item_botton->setIcon(QIcon("://resources/images/items/potions/orange.png"));
-        }
-        else if (items[i].getShortDescription().compare("Elixir of Life") == 0) {
-            QPushButton *Item_botton = dynamic_cast<QPushButton*>(roomLayout->itemAtPosition(5, 5)->widget());
-            Item_botton->setFlat(true);
-            Item_botton->setIconSize(QSize(32, 32));
-            Item_botton->setIcon(QIcon("://resources/images/items/potions/emerald.png"));
-        }
-        else if (items[i].getShortDescription().compare("Invisibility Potion") == 0) {
-            QPushButton *Item_botton = dynamic_cast<QPushButton*>(roomLayout->itemAtPosition(5, 5)->widget());
-            Item_botton->setFlat(true);
-            Item_botton->setIconSize(QSize(32, 32));
-            Item_botton->setIcon(QIcon("://resources/images/items/potions/emerald.png"));
-        }
+        QPushButton *Item_botton = dynamic_cast<QPushButton*>(roomLayout->itemAtPosition(5, 5)->widget());
+        Item_botton->setFlat(true);
+        Item_botton->setIconSize(QSize(32, 32));
+        Item_botton->setIcon(QIcon(items[i].getTile().c_str()));
     }
 }
 
 void GUI::keyPressEvent(QKeyEvent *event) {
 
     switch(event->key()){
-        case Qt::Key_Up:
-            northButtonClicked();
-            break;
-        case Qt::Key_Left:
-            westButtonClicked();
-            break;
-        case Qt::Key_Right:
-            eastButtonClicked();
-            break;
-        case Qt::Key_Down:
-            southButtonClicked();
-            break;
-        case Qt::Key_F1:
-            infoButtonClicked();
-            break;
-        case Qt::Key_F2:
-            mapButtonClicked();
-            break;
-        case Qt::Key_F3:
-            invButtonClicked();
-            break;
-        case Qt::Key_F4:
-            lookButtonClicked();
-            break;
+    case Qt::Key_Up:
+        northButtonClicked();
+        break;
+    case Qt::Key_Left:
+        westButtonClicked();
+        break;
+    case Qt::Key_Right:
+        eastButtonClicked();
+        break;
+    case Qt::Key_Down:
+        southButtonClicked();
+        break;
+    case Qt::Key_F1:
+        infoButtonClicked();
+        break;
+    case Qt::Key_F2:
+        mapButtonClicked();
+        break;
+    case Qt::Key_F3:
+        invButtonClicked();
+        break;
+    case Qt::Key_F4:
+        lookButtonClicked();
+        break;
     }
 }
 
@@ -418,12 +367,11 @@ void GUI::drawInventory() {
     vector<Item> items = zorkul.getItemsInCharacter();
     int j = 0;
     for (unsigned int i = 0; i < items.size(); i++) {
-            QPushButton *inventoryButton = new QPushButton();
-            string tile = items[i].getTile();
-            inventoryButton->setIcon(QIcon(tile.c_str()));
-            inventoryButton->setFlat(true);
-            inventoryButton->setIconSize(QSize(32, 32));
-            inventoryButton->setStyleSheet("border: none; padding: 0 0 0 0;");
-            inventoryLayout->addWidget(inventoryButton, i, j);
+        QPushButton *inventoryButton = new QPushButton();
+        inventoryButton->setIcon(QIcon(items[i].getTile().c_str()));
+        inventoryButton->setFlat(true);
+        inventoryButton->setIconSize(QSize(32, 32));
+        inventoryButton->setStyleSheet("border: none; padding: 0 0 0 0;");
+        inventoryLayout->addWidget(inventoryButton, i, j);
     }
 }
