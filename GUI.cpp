@@ -72,12 +72,6 @@ GUI::GUI(QWidget *parent) :
     roomLayout = new QGridLayout();
     inventoryLayout = new QGridLayout();
 
-    inventory = new QWidget();
-    inventory->setLayout(inventoryLayout);
-    stackedPanes = new QStackedWidget();
-    stackedPanes->addWidget(toprightpane);
-    stackedPanes->addWidget(inventory);
-
     roomLayout->setHorizontalSpacing(0);
     roomLayout->setVerticalSpacing(0);
     roomLayout->setContentsMargins(0, 0, 0, 0);
@@ -85,6 +79,13 @@ GUI::GUI(QWidget *parent) :
     inventoryLayout->setHorizontalSpacing(0);
     inventoryLayout->setVerticalSpacing(0);
     inventoryLayout->setContentsMargins(0, 0, 0, 0);
+
+    inventory = new QWidget();
+    inventory->setLayout(inventoryLayout);
+
+    stackedPanes = new QStackedWidget();
+    stackedPanes->addWidget(toprightpane);
+    stackedPanes->addWidget(inventory);
 
     drawFloor();
     drawWall();
@@ -253,29 +254,21 @@ void GUI::drawWall() {
     int j = 0;
     for (unsigned int i = 0; i < 10; i++) {
         QPushButton *wallLabel = dynamic_cast<QPushButton*>(roomLayout->itemAtPosition(i, j)->widget());
-        wallLabel->setFlat(true);
-        wallLabel->setIconSize(QSize(32, 32));
         wallLabel->setIcon(QIcon("://resources/images/rooms/brick_brown0.png"));
     }
     j = 9;
     for (unsigned int i = 0; i < 10; i++) {
         QPushButton *wallLabel = dynamic_cast<QPushButton*>(roomLayout->itemAtPosition(i, j)->widget());
-        wallLabel->setFlat(true);
-        wallLabel->setIconSize(QSize(32, 32));
         wallLabel->setIcon(QIcon("://resources/images/rooms/brick_brown0.png"));
     }
     j = 9;
     for (unsigned int i = 0; i < 10; i++) {
         QPushButton *wallLabel = dynamic_cast<QPushButton*>(roomLayout->itemAtPosition(j, i)->widget());
-        wallLabel->setFlat(true);
-        wallLabel->setIconSize(QSize(32, 32));
         wallLabel->setIcon(QIcon("://resources/images/rooms/brick_brown0.png"));
     }
     j = 0;
     for (unsigned int i = 0; i < 10; i++) {
         QPushButton *wallLabel = dynamic_cast<QPushButton*>(roomLayout->itemAtPosition(j, i)->widget());
-        wallLabel->setFlat(true);
-        wallLabel->setIconSize(QSize(32, 32));
         wallLabel->setIcon(QIcon("://resources/images/rooms/brick_brown0.png"));
     }
 }
@@ -285,26 +278,18 @@ void GUI::drawDoor() {
     for (unsigned int i = 0; i < exits.size(); i++) {
         if (exits[i].compare("east") == 0) {
             QPushButton *eastButton = dynamic_cast<QPushButton*>(roomLayout->itemAtPosition(4, 9)->widget());
-            eastButton->setFlat(true);
-            eastButton->setIconSize(QSize(32, 32));
             eastButton->setIcon(QIcon("://resources/images/rooms/closed_door.png"));
         }
         if (exits[i].compare("west") == 0) {
             QPushButton *westButton = dynamic_cast<QPushButton*>(roomLayout->itemAtPosition(4, 0)->widget());
-            westButton->setFlat(true);
-            westButton->setIconSize(QSize(32, 32));
             westButton->setIcon(QIcon("://resources/images/rooms/closed_door.png"));
         }
         if (exits[i].compare("north") == 0) {
             QPushButton *northButton = dynamic_cast<QPushButton*>(roomLayout->itemAtPosition(0, 5)->widget());
-            northButton->setFlat(true);
-            northButton->setIconSize(QSize(32, 32));
             northButton->setIcon(QIcon("://resources/images/rooms/closed_door.png"));
         }
         if (exits[i].compare("south") == 0) {
             QPushButton *southButton = dynamic_cast<QPushButton*>(roomLayout->itemAtPosition(9, 5)->widget());
-            southButton->setFlat(true);
-            southButton->setIconSize(QSize(32, 32));
             southButton->setIcon(QIcon("://resources/images/rooms/closed_door.png"));
         }
     }
@@ -334,7 +319,6 @@ void GUI::drawItem(){
 }
 
 void GUI::keyPressEvent(QKeyEvent *event) {
-
     switch(event->key()){
     case Qt::Key_Up:
         northButtonClicked();
