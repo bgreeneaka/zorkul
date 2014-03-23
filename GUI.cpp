@@ -82,6 +82,9 @@ GUI::GUI(QWidget *parent) :
     setupDoors();
     itemClick();
 
+    QPushButton *characterButton = dynamic_cast<QPushButton*>(roomLayout->itemAtPosition(4, 4)->widget());
+    connect(characterButton, SIGNAL(released()), this, SLOT(invButtonClicked()));
+
     mainLayout->setSizeConstraint(QLayout::SetFixedSize);
 
     controlsLayout->addWidget(toprightpane, 1, 0,4,4);
@@ -210,6 +213,8 @@ void GUI::drawFloor() {
             roomLayout->addWidget(floorLabel, i, j);
         }
     }
+     QPushButton *floorLabel = dynamic_cast<QPushButton*>(roomLayout->itemAtPosition(4, 4)->widget());
+     floorLabel->setIcon(QIcon("://resources/images/rooms/elf_m.png"));
 }
 
 void GUI::setupDoors() {
