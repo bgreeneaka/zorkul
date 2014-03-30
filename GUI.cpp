@@ -1,9 +1,7 @@
 #include <QtWidgets>
 #include "GUI.h"
 #include <sstream>
-//temp key handler
-//#include <QApplication>
-//temp key handler
+
 using namespace std;
 
 GUI::GUI(QWidget *parent) :
@@ -12,9 +10,7 @@ GUI::GUI(QWidget *parent) :
     // bottom display
     bottomDisplay = new QLineEdit("");
 
-    //temp key handler
-    //QApplication::instance()->installEventFilter(this);
-    //temp key handler
+
 
     bottomDisplay->setAlignment(Qt::AlignLeft);
     bottomDisplay->setMaxLength(35);
@@ -25,7 +21,6 @@ GUI::GUI(QWidget *parent) :
     bottomDisplay->setFont(font);
 
     // this has to be done to make arrow keys work ---start
-    //bottomDisplay->setFocus();
     topLevelWidget()->setFocus();
     // this has to be done to make arrow keys work ---end
 
@@ -218,7 +213,6 @@ void GUI::updateGUI(){
     drawDoor();
     drawInventory();
     // this has to be done to make arrow keys work ---start
-    //bottomDisplay->setFocus();
     topLevelWidget()->setFocus();
     // this has to be done to make arrow keys work ---end
 }
