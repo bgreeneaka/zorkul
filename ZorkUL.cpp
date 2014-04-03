@@ -63,7 +63,20 @@ string ZorkUL::processCommand(Command command) {
 
     string commandWord = command.getCommandWord();
     if (commandWord.compare("info") == 0){
-        return "reliable info here";
+        string output = "To navigate click objectes you are intrested in.\n";
+        output += "i.e.click Doors to move to another loction \n";
+        output += " or click items(on map or inside your inventory) to take or put it back.\n" ;
+        output += " Alternativley you can usse arrow keys\n";
+        output += " OR for traditionalist you can use good old fashioned command line\n" ;
+        output += " Supportd commands: \n" ;
+        output += " - go <direction> \n" ;
+        output += " - take <item>\n" ;
+        output += " - put <item>\n" ;
+        output += " - inventory\n" ;
+        output += " - info\n" ;
+        output += " - map\n" ;
+        output += " - quit" ;
+        return output;
     }
 
     else if (commandWord.compare("map") == 0)
@@ -128,7 +141,8 @@ string ZorkUL::processCommand(Command command) {
         if (command.hasSecondWord())
             cout << "overdefined input"<< endl;
         else
-            return "true"; /**signal to quit*/
+            exit(0);
+
     }
     return "invalid input";
 }
