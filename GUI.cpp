@@ -172,7 +172,10 @@ void GUI::keyPressEvent(QKeyEvent *event) {
 
 void GUI :: itemButtonClicked(){
     vector<Item> items = zorkul.getItemsInRoom();
-    qbutclicked("take",items[0].getShortDescription());
+    try {
+        qbutclicked("take",items.at(items.size()-1).getShortDescription());
+    } catch (out_of_range) {
+    }
 }
 
 void GUI:: itemClick(){
@@ -186,7 +189,10 @@ void GUI::showInventoryPane() {
 }
 
 void GUI::inventoryButtonClick(int index) {
-    qbutclicked("put", zorkul.getItemsInCharacter().at(index).getShortDescription().c_str());
+    try {
+        qbutclicked("put", zorkul.getItemsInCharacter().at(index).getShortDescription().c_str());
+    } catch (out_of_range) {
+    }
 }
 
 void GUI::qbutclicked(string firstWord, string secondWord){
